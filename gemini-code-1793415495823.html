@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Reading Interactive Test - Ms Lê Hằng English</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #8854C0;
+      --secondary: #00C9A7;
+      --accent: #FDCB6E;
+      --correct: #00D26A;
+      --wrong: #FF4757;
+      --bg-card: rgba(255, 255, 255, 0.96);
+      --text-main: #2d3436;
+      --border-radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', 'Quicksand', sans-serif;
+    }
+
+    /* Animated Gradient + Floating SVG Pattern Background */
+    body {
+      background: linear-gradient(-45deg, #f3e7ff, #e0fbf6, #fff6e0, #fde8f0, #e8f0fe);
+      background-size: 400% 400%;
+      animation: gradientFlow 14s ease infinite;
+      color: var(--text-main);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating SVG Pattern Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke-width='2'%3E%3Cpath d='M30 20 l4 9 10 1 -7 7 2 10 -9 -5 -9 5 2 -10 -7 -7 10 -1 z' fill='%23FDCB6E'/%3E%3Ccircle cx='120' cy='35' r='8' fill='%23FF7675' opacity='0.7'/%3E%3Ccircle cx='120' cy='23' r='5' fill='%23FF9FF3'/%3E%3Ccircle cx='132' cy='35' r='5' fill='%23FF9FF3'/%3E%3Ccircle cx='120' cy='47' r='5' fill='%23FF9FF3'/%3E%3Ccircle cx='108' cy='35' r='5' fill='%23FF9FF3'/%3E%3Cpath d='M35 115 c-8 0 -14 -5 -14 -12 c0 -6 5 -11 11 -12 c3 -6 11 -9 18 -6 c6 -4 15 0 16 8 c6 2 9 8 7 14 c-2 5 -8 8 -14 8 z' fill='%2374B9FF' opacity='0.6'/%3E%3Cpath d='M110 120 l5 -10 l6 7 l10 0 l6 -7 l5 10 c2 12 -6 22 -16 22 c-10 0 -18 -10 -16 -22 z' fill='%23A29BFE' opacity='0.7'/%3E%3Ccircle cx='120' cy='128' r='2' fill='%23fff'/%3E%3Ccircle cx='132' cy='128' r='2' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E");
+      animation: floatPattern 28s linear infinite;
+    }
+
+    @keyframes floatPattern {
+      from { background-position: 0 0; }
+      to { background-position: 320px 320px; }
+    }
+
+    /* Pastel Purple Highlighting */
+    ::selection {
+      background: #b794f4;
+      color: #ffffff;
+    }
+    .user-highlight {
+      background-color: #b794f4;
+      color: #ffffff;
+      padding: 1px 4px;
+      border-radius: 5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    /* Top Header & Banner */
+    header {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 3px solid #e2d4f0;
+      padding: 6px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(136, 84, 192, 0.1);
+    }
+
+    .brand-box {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 0.2px;
+    }
+    .brand-ad {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #d63031;
+      background: #fff3cd;
+      padding: 2px 8px;
+      border-radius: 8px;
+      border: 1px solid #ffeaa7;
+    }
+
+    /* Timer & Controls */
+    .control-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-3d {
+      border: none;
+      border-radius: 15px;
+      padding: 7px 14px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-3d:hover {
+      transform: scale(1.04) translateY(-1px);
+    }
+    .btn-3d:active {
+      transform: translateY(3px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 0 #5f3dc4;
+    }
+    .btn-secondary {
+      background: var(--secondary);
+      color: #fff;
+      box-shadow: 0 4px 0 #00967d;
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: #2d3436;
+      box-shadow: 0 4px 0 #e1a93c;
+    }
+    .btn-danger {
+      background: var(--wrong);
+      color: #fff;
+      box-shadow: 0 4px 0 #c0392b;
+    }
+
+    .timer-badge {
+      font-size: 1.05rem;
+      font-weight: 900;
+      background: #2d3436;
+      color: #00D26A;
+      padding: 5px 14px;
+      border-radius: 14px;
+      letter-spacing: 1px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Warning Notice Sub-bar */
+    .warning-banner {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(90deg, #fff3cd, #ffeaa7, #fff3cd);
+      border-bottom: 2px dashed #f39c12;
+      padding: 5px 18px;
+      font-size: 0.8rem;
+      color: #7f5000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .warning-banner strong {
+      color: #d63031;
+      font-weight: 900;
+    }
+
+    /* Passage Tabs & Progress Bar */
+    .nav-bar {
+      position: relative;
+      z-index: 10;
+      background: #ffffff;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #edf2f7;
+      gap: 15px;
+    }
+    .passage-tabs {
+      display: flex;
+      gap: 8px;
+    }
+    .tab-btn {
+      border: 2px solid #dfe6e9;
+      background: #f8f9fa;
+      color: #636e72;
+      padding: 6px 16px;
+      border-radius: 15px;
+      font-weight: 800;
+      font-size: 0.86rem;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #dfe6e9;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      transform: scale(1.03);
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 0 #5f3dc4;
+    }
+
+    .progress-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      max-width: 380px;
+    }
+    .progress-track {
+      flex: 1;
+      height: 14px;
+      background: #edf2f7;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #dfe6e9;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00C9A7, #00D26A);
+      transition: width 0.3s ease;
+    }
+    .progress-label {
+      font-size: 0.82rem;
+      font-weight: 900;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    /* Split Screen Layout */
+    .split-container {
+      position: relative;
+      z-index: 5;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 12px 16px;
+      overflow: hidden;
+    }
+
+    .pane {
+      background: var(--bg-card);
+      border-radius: var(--border-radius);
+      border: 2px solid #e2d4f0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      overflow-y: auto;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Scrollbar */
+    .pane::-webkit-scrollbar {
+      width: 9px;
+    }
+    .pane::-webkit-scrollbar-track {
+      background: #f1f2f6;
+      border-radius: 8px;
+    }
+    .pane::-webkit-scrollbar-thumb {
+      background: #b2bec3;
+      border-radius: 8px;
+    }
+    .pane::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Passage Styling */
+    .passage-header {
+      text-align: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px dashed #dfe6e9;
+    }
+    .passage-header h2 {
+      color: var(--primary);
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+    .para-card {
+      background: #ffffff;
+      border: 2px solid #edf2f7;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+      transition: all 0.3s;
+    }
+    .para-label {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 900;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-right: 8px;
+      font-size: 0.9rem;
+    }
+    .para-text {
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: #2d3436;
+    }
+    .translate-btn {
+      margin-top: 10px;
+      background: #f3e8ff;
+      color: #6b21a8;
+      border: 1.5px solid #d8b4fe;
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .translate-btn:hover {
+      background: #e9d5ff;
+      transform: scale(1.03);
+    }
+    .para-trans {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #faf5ff;
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    /* Highlighted Evidence Pulse */
+    .evidence-active {
+      background: #ffeaa7 !important;
+      color: #d63031 !important;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 800;
+      box-shadow: 0 0 0 3px #fdcb6e;
+      animation: pulseEv 1.2s ease infinite alternate;
+    }
+    @keyframes pulseEv {
+      from { background: #ffeaa7; }
+      to { background: #ffd32a; }
+    }
+
+    /* Glossary Table */
+    .glossary-box {
+      margin-top: 24px;
+      background: #ffffff;
+      border: 2px solid #d8b4fe;
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .glossary-box h3 {
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+    .glossary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    .glossary-table th {
+      background: var(--primary);
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .glossary-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #edf2f7;
+    }
+    .glossary-table tr:nth-child(even) {
+      background: #faf5ff;
+    }
+
+    /* Question Cards (Right Pane) */
+    .section-instruction {
+      background: linear-gradient(135deg, #f3e8ff, #e0fbf6);
+      border: 2px solid #d8b4fe;
+      padding: 12px 16px;
+      border-radius: 15px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #2d3436;
+    }
+
+    .q-card {
+      background: #ffffff;
+      border: 2px solid #dfe6e9;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 0 #dfe6e9;
+      transition: all 0.2s;
+    }
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .q-num {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 900;
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.92rem;
+      box-shadow: 0 3px 0 #5f3dc4;
+    }
+    .q-prompt {
+      font-weight: 800;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    /* MCQ Grid Style (Exact Match to Screenshot) */
+    .mcq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .mcq-btn {
+      background: #ffffff;
+      border: 2px solid #dfe6e9;
+      border-radius: 16px;
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #dfe6e9;
+      transition: transform 0.15s, border-color 0.2s, background 0.2s;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #2d3436;
+    }
+    .mcq-btn:hover:not(:disabled) {
+      transform: scale(1.02);
+      border-color: var(--primary);
+    }
+    .mcq-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mcq-letter {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: #f1f2f6;
+      color: #57606f;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .badge-correct-ans {
+      display: none;
+      background: #00D26A;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    /* Correct & Wrong Button States */
+    .mcq-btn.correct {
+      background: #e3fcef;
+      border-color: #00D26A;
+      box-shadow: 0 4px 0 #00b85c;
+      color: #006633;
+    }
+    .mcq-btn.correct .mcq-letter {
+      background: #00D26A;
+      color: #fff;
+    }
+    .mcq-btn.correct .badge-correct-ans {
+      display: inline-block;
+    }
+
+    .mcq-btn.wrong {
+      background: #ffeef0;
+      border-color: #FF4757;
+      box-shadow: 0 4px 0 #e03140;
+      color: #c0392b;
+      animation: shakeAnim 0.45s ease;
+    }
+    .mcq-btn.wrong .mcq-letter {
+      background: #FF4757;
+      color: #fff;
+    }
+
+    @keyframes shakeAnim {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-7px); }
+      40%, 80% { transform: translateX(7px); }
+    }
+
+    /* Dropdown & Gap Fill Inputs */
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .select-3d {
+      padding: 9px 14px;
+      border-radius: 14px;
+      border: 2px solid #b2bec3;
+      font-weight: 800;
+      font-size: 0.92rem;
+      background: #fff;
+      box-shadow: 0 4px 0 #dfe6e9;
+      cursor: pointer;
+      min-width: 220px;
+      outline: none;
+    }
+    .select-3d.correct {
+      background: #e3fcef;
+      border-color: #00D26A;
+      color: #006633;
+      box-shadow: 0 4px 0 #00b85c;
+    }
+    .select-3d.wrong {
+      background: #ffeef0;
+      border-color: #FF4757;
+      color: #c0392b;
+      box-shadow: 0 4px 0 #e03140;
+      animation: shakeAnim 0.45s ease;
+    }
+
+    .gap-input {
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 2px solid #b2bec3;
+      font-weight: 800;
+      font-size: 0.95rem;
+      width: 210px;
+      outline: none;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    }
+    .gap-input.correct {
+      background: #e3fcef;
+      border-color: #00D26A;
+      color: #006633;
+    }
+    .gap-input.wrong {
+      background: #ffeef0;
+      border-color: #FF4757;
+      color: #c0392b;
+      animation: shakeAnim 0.45s ease;
+    }
+
+    /* 4-Step Detailed Explanation Box (Matches User's Screenshot) */
+    .exp-container {
+      display: none;
+      margin-top: 16px;
+      border: 2px dashed #9b59b6;
+      border-radius: 18px;
+      padding: 16px;
+      background: #ffffff;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .exp-heading {
+      color: #e74c3c;
+      font-weight: 900;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+    }
+    .exp-step1 {
+      background: #fff9e6;
+      border: 1px solid #ffe8a1;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .exp-step2-title {
+      font-weight: 800;
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+      color: #2d3436;
+    }
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .exp-opt-box {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 0.84rem;
+      background: #f8fafc;
+      line-height: 1.45;
+    }
+    .opt-origin {
+      font-weight: 900;
+      color: #0984e3;
+      margin-right: 4px;
+    }
+    .tag-true {
+      background: #d1fae5;
+      color: #047857;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-right: 5px;
+    }
+    .tag-false {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: 800;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-right: 5px;
+    }
+
+    .exp-step3 {
+      background: #eafaf1;
+      border: 1px solid #a9dfbf;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 0.89rem;
+      color: #145a32;
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+    .tag-grammar {
+      background: #fef08a;
+      color: #854d0e;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      margin: 0 5px;
+    }
+    .exp-step4 {
+      background: #fdedec;
+      border: 1px solid #f5b7b1;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      color: #78281f;
+      line-height: 1.5;
+    }
+    .locate-btn {
+      margin-top: 8px;
+      background: #0984e3;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 0 #0652DD;
+    }
+    .locate-btn:hover {
+      transform: scale(1.03);
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Result Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: #fff;
+      max-width: 540px;
+      width: 100%;
+      border-radius: 24px;
+      padding: 28px;
+      text-align: center;
+      border: 4px solid var(--primary);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      animation: fadeIn 0.3s ease;
+    }
+    .band-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 14px auto;
+      box-shadow: 0 8px 20px rgba(136, 84, 192, 0.35);
+    }
+    .band-circle span {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .band-circle strong {
+      font-size: 2.3rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .teacher-feedback {
+      background: #fff9e6;
+      border: 2px dashed #f39c12;
+      padding: 14px;
+      border-radius: 14px;
+      margin: 14px 0;
+      font-weight: 700;
+      color: #7f5000;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 960px) {
+      body { height: auto; overflow: auto; }
+      .split-container { grid-template-columns: 1fr; overflow: visible; }
+      .pane { max-height: 65vh; }
+      .mcq-grid, .exp-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- HEADER -->
+<header>
+  <div class="brand-box">
+    <div class="brand-title">🎓 Giáo viên tạo: Ms Lê Hằng English</div>
+    <div class="brand-ad">🔥 Đăng kí học tiếng anh 1-12, IELTS vui lòng liên hệ Ms Lê Hằng, zalo 0584 965 348.</div>
+  </div>
+
+  <div class="control-bar">
+    <div class="timer-badge" id="timer-display">20:00</div>
+    <button class="btn-3d btn-primary" id="btn-start-timer" onclick="toggleTimer()">⏱️ BẮT ĐẦU TÍNH GIỜ LÀM BÀI</button>
+    <button class="btn-3d btn-accent" onclick="resetTimer()">🔄 Đặt lại 20p</button>
+    <button class="btn-3d btn-secondary" onclick="submitExam()">🏆 NỘP BÀI & CHẤM BAND</button>
+  </div>
+</header>
+
+<!-- WARNING BANNER -->
+<div class="warning-banner">
+  <div>
+    <strong>⚠️ LỜI NHẮC CỰC KỲ QUAN TRỌNG ⚠️</strong>
+    Chỉ có đọc kỹ giải thích ngay sau mỗi câu, sau đó ghi lại từ vựng/cấu trúc mới vào vở để học thì mới thực sự giỏi lên. Làm cho xong mà không đọc giải thích hay đọc qua loa không ghi chép thì chỉ tốn thời gian vô ích! <strong>- Kéo tới đâu, làm tới đó! *</strong>
+  </div>
+  <div style="white-space:nowrap; font-weight:800; color:#6b21a8;">✨ Mẹo: Bôi đen bất kỳ từ nào để Highlight tím!</div>
+</div>
+
+<!-- PASSAGE TABS & PROGRESS -->
+<div class="nav-bar">
+  <div class="passage-tabs">
+    <button class="tab-btn active" onclick="switchPassage(1)">📖 Passage 1: Hunter-Gatherer Sleep (Q1–13)</button>
+    <button class="tab-btn" onclick="switchPassage(2)">🌲 Passage 2: Bristlecone Pines (Q14–26)</button>
+    <button class="tab-btn" onclick="switchPassage(3)">🗣️ Passage 3: Loss of Rare Languages (Q27–40)</button>
+  </div>
+  <div class="progress-wrapper">
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <div class="progress-label" id="progress-label">Đã làm: 0/40 (0%)</div>
+  </div>
+</div>
+
+<!-- SPLIT SCREEN CONTENT -->
+<div class="split-container">
+  <!-- LEFT PANE: READING PASSAGE & GLOSSARY -->
+  <div class="pane" id="left-pane"></div>
+
+  <!-- RIGHT PANE: EXERCISES -->
+  <div class="pane" id="right-pane"></div>
+</div>
+
+<!-- SCORE MODAL -->
+<div class="modal-backdrop" id="score-modal">
+  <div class="modal-card">
+    <h2 style="color:var(--primary); font-weight:900;">🎉 KẾT QUẢ BÀI THI IELTS READING 🎉</h2>
+    <div class="band-circle">
+      <span>IELTS BAND</span>
+      <strong id="modal-band">0.0</strong>
+    </div>
+    <p style="font-size:1.1rem; font-weight:800;" id="modal-score-line">Số câu đúng: 0 / 40 (0%)</p>
+    <div class="teacher-feedback" id="modal-feedback"></div>
+    <p style="font-size:0.85rem; color:#636e72; margin-bottom:16px;">
+      Đăng kí học tiếng anh 1-12, IELTS vui lòng liên hệ Ms Lê Hằng, zalo 0584 965 348.
+    </p>
+    <button class="btn-3d btn-primary" onclick="closeModal()">Đóng & Xem lại Giải thích chi tiết</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   1. WEB AUDIO API (Ding / Chime for Correct, Buzz / Téo teo tèo for Wrong)
+============================================================================ */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function playSound(isCorrect) {
+  try {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    const now = audioCtx.currentTime;
+    if (isCorrect) {
+      // Bright Gamification "Ding-Chime"
+      const freqs = [587.33, 880, 1174.66];
+      freqs.forEach((f, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(f, now + idx * 0.07);
+        gain.gain.setValueAtTime(0.18, now + idx * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.45);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + idx * 0.07);
+        osc.stop(now + idx * 0.07 + 0.45);
+      });
+    } else {
+      // Playful "Téo teo tèo" Descending Buzz
+      const freqs = [340, 290, 220];
+      freqs.forEach((f, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(f, now + idx * 0.12);
+        gain.gain.setValueAtTime(0.2, now + idx * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.22);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now + idx * 0.12);
+        osc.stop(now + idx * 0.12 + 0.22);
+      });
+    }
+  } catch (e) {}
+}
+
+/* ============================================================================
+   2. CONFETTI EFFECT
+============================================================================ */
+const confettiCanvas = document.getElementById('confetti-canvas');
+const cCtx = confettiCanvas.getContext('2d');
+let confettiPieces = [];
+
+function resizeConfetti() {
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeConfetti);
+resizeConfetti();
+
+function fireConfetti() {
+  const colors = ['#00D26A', '#8854C0', '#FDCB6E', '#00C9A7', '#FF7675', '#74B9FF'];
+  for (let i = 0; i < 65; i++) {
+    confettiPieces.push({
+      x: window.innerWidth / 2 + (Math.random() - 0.5) * 240,
+      y: window.innerHeight / 2,
+      vx: (Math.random() - 0.5) * 12,
+      vy: -Math.random() * 12 - 4,
+      size: Math.random() * 8 + 5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 10
+    });
+  }
+  if (confettiPieces.length <= 65) requestAnimationFrame(updateConfetti);
+}
+
+function updateConfetti() {
+  cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  confettiPieces.forEach((p) => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.35;
+    p.rot += p.vRot;
+    cCtx.save();
+    cCtx.translate(p.x, p.y);
+    cCtx.rotate((p.rot * Math.PI) / 180);
+    cCtx.fillStyle = p.color;
+    cCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+    cCtx.restore();
+  });
+  confettiPieces = confettiPieces.filter((p) => p.y < confettiCanvas.height + 30);
+  if (confettiPieces.length > 0) requestAnimationFrame(updateConfetti);
+}
+
+/* ============================================================================
+   3. SHUFFLE ARRAY UTILITY
+============================================================================ */
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+/* ============================================================================
+   4. PASSAGES, SENTENCE-BY-SENTENCE PARAPHRASED EVIDENCE & 50+ GLOSSARY DATA
+============================================================================ */
+const PASSAGES = {
+  1: {
+    title: "Sleep Study on Modern-Day Hunter-Gatherers Dispels Popular Notions",
+    paragraphs: [
+      {
+        label: "A",
+        text: `Modern sleep difficulties are frequently attributed to contemporary industrial living—such as urban lighting, extended working hours, commuting, caffeine, and the Internet. Although specialists often assume our ancestors enjoyed longer rest by aligning their sleep with sunrise and sunset, recent findings indicate that ancient humans likely also slept less than the commonly advised eight hours.`,
+        trans: `Những rắc rối về giấc ngủ phổ biến trong cuộc sống hiện đại từ lâu đã bị đổ lỗi cho xã hội công nghiệp của chúng ta, từ ánh đèn thành phố, giờ làm việc và đi lại kéo dài, cho đến caffeine và Internet. Các nhà nghiên cứu giấc ngủ thường nhìn lại thời kỳ con người có thể nghỉ ngơi nhiều hơn bằng cách ngủ và thức theo nhịp mặt trời. Hóa ra điều này có thể không hoàn toàn đúng; tổ tiên chúng ta có lẽ cũng không ngủ đủ 8 tiếng như khuyến nghị.`
+      },
+      {
+        label: "B",
+        text: `To investigate this, scientists traveled globally to observe three Remaining foraging communities: the Hadza in Tanzania, the San in Namibia, and the Tsimane in Bolivia. <span id="ev-q1">Isolated from electricity, media, and modern distractions, these pre-industrial groups are believed to exhibit sleep patterns comparable to humans living over 10,000 years ago.</span> <span id="ev-q2">Visiting their often humid and remote habitats, the team utilized medical monitoring instruments to track 94 individuals across a total of 1,165 days.</span>`,
+        trans: `Trong một nghiên cứu gần đây, các nhà nghiên cứu đã đi khắp thế giới để kiểm tra giấc ngủ ở một số xã hội săn bắn hái lượm cuối cùng còn sót lại: người Hadza ở Tanzania, người San ở Namibia và người Tsimane ở Bolivia. Tách biệt khỏi truyền thông, điện và các yếu tố gây xao nhãng khác, các xã hội tiền công nghiệp này được cho là có cách ngủ giống con người hơn 10.000 năm trước. Đi đến nơi họ sống, thường ở những vùng xa xôi, ẩm ướt, các nhà nghiên cứu đã dùng thiết bị y tế ghi lại thói quen ngủ của 94 người thuộc bộ lạc trong tổng cộng 1.165 ngày.`
+      },
+      {
+        label: "C",
+        text: `Despite living on different continents, all three groups displayed remarkably consistent habits: they averaged slightly under 6.5 hours of nightly sleep, avoided regular daytime naps, and stayed awake after nightfall. <span id="ev-q3">Much like people in industrialized societies, the Hadza, San, and Tsimane spend roughly 6.9 to 8.5 hours resting in bed—longer than their actual sleep duration—resulting in a sleep efficiency rate matching modern populations.</span>`,
+        trans: `Họ tìm thấy các kiểu ngủ rất giống nhau bất chấp sự cô lập về địa lý. Trung bình, cả ba nhóm ngủ ít hơn 6,5 giờ mỗi đêm một chút, không ngủ trưa và không đi ngủ ngay khi trời tối. Giống như nhiều người trong chúng ta, người Hadza, San và Tsimane dành nhiều thời gian trên giường hơn (từ 6,9 đến 8,5 giờ) so với thời gian thực sự ngủ. Điều này tạo nên hiệu suất giấc ngủ rất giống với các quần thể công nghiệp ngày nay.`
+      },
+      {
+        label: "D",
+        text: `<span id="ev-q4">Jerome Siegel, who heads the Center for Sleep Research at UCLA, notes that the data implies sleep behavior is rooted in core human biology rather than being shaped primarily by culture or environment.</span> This challenges vast expenditures on studies questioning why many adults sleep around six hours, as well as assumptions linking short sleep to obesity and mood disorders. <span id="ev-q5">Researchers have recorded a typical mid-afternoon dip in human <strong>energy</strong>, which some attributed to suppressing an innate urge to nap.</span>`,
+        trans: `Theo Jerome Siegel, giám đốc Trung tâm Nghiên cứu Giấc ngủ của Đại học California, bằng chứng cho thấy thói quen ngủ có thể không phụ thuộc vào môi trường hay văn hóa, mà nằm ở cấu tạo sinh học cốt lõi của con người. Những phát hiện này đặt dấu hỏi cho hàng triệu đô la chi vào nghiên cứu giải thích tại sao một số người chỉ ngủ khoảng 6 tiếng mỗi đêm, cũng như liệu thiếu ngủ có phải nguyên nhân gây béo phì, rối loạn tâm trạng hay không. Các nhà khoa học đã ghi nhận rằng năng lượng (energy) của con người thường giảm xuống vào giữa buổi chiều.`
+      },
+      {
+        label: "E",
+        text: `<span id="ev-q6">Yet the new investigation refutes that hypothesis, revealing that daytime napping was uncommon among foragers—occurring on at most 7% of winter days and 22% of <strong>summer</strong> days.</span> <span id="ev-q7">Because the tracking instruments were mainly effective at registering extended rest, it remains possible that participants took very <strong>short</strong> naps lasting 15 minutes or less.</span>`,
+        trans: `Tuy nhiên, nghiên cứu mới cung cấp bằng chứng cho thấy điều này khó xảy ra và việc ngủ trưa thực sự hiếm gặp ở các xã hội săn bắn hái lượm. Các nhà nghiên cứu ước tính giấc ngủ ngắn chỉ diễn ra tối đa 7% số ngày mùa đông và 22% số ngày mùa hè (summer). Họ lưu ý rằng thiết bị chỉ phát hiện tốt các giấc ngủ dài, nên có khả năng một số đối tượng đã chợp mắt rất ngắn (short), khoảng 15 phút hoặc ít hơn.`
+      },
+      {
+        label: "F",
+        text: `Another notable insight involved circadian rhythms governed by daylight. <span id="ev-q8">Rather than sleeping immediately at dusk, tribe members remained awake for 2.5 to 4.4 hours past sunset; although all three communities lit <strong>fires</strong>, the illumination was far dimmer than electric bulbs.</span> <span id="ev-q9">Furthermore, they generally woke up within an hour before or after <strong>sunrise</strong>.</span>`,
+        trans: `Một phát hiện thú vị khác liên quan đến nhịp sinh học hàng ngày theo ánh sáng mặt trời. Thay vì đi ngủ ngay lúc chạng vạng, người bộ lạc thức trung bình từ 2,5 đến 4,4 giờ sau khi mặt trời lặn. Cả ba bộ lạc đều đốt lửa (fires), nhưng ánh sáng thấp hơn nhiều so với bóng đèn. Tuy nhiên, họ có xu hướng thức dậy trong khoảng một giờ trước và một giờ sau khi mặt trời mọc (sunrise).`
+      },
+      {
+        label: "G",
+        text: `<span id="ev-q10">Siegel and his colleagues further analyzed the role of <strong>temperature</strong>, discovering that it exerted a major influence on sleep timing—nearly as significant as light.</span> Across both winter and summer, sleep consistently took place during the nightly cooling phase, whereas waking coincided with the peak of the daily warming cycle.`,
+        trans: `Siegel và các đồng tác giả đã điều tra sâu hơn bằng cách xem xét tầm quan trọng của nhiệt độ (temperature). Họ phát hiện nó cũng đóng vai trò lớn, dù kém quan trọng hơn ánh sáng đôi chút trong việc ảnh hưởng đến kiểu ngủ. Giấc ngủ ở cả mùa đông và mùa hè thường diễn ra trong giai đoạn nhiệt độ giảm xuống và thời gian thức dậy thường rơi vào đỉnh điểm của xu hướng ấm lên hàng ngày.`
+      },
+      {
+        label: "H",
+        text: `<span id="ev-q11">The studied foraging groups differ markedly from modern urban populations: virtually none of them suffered from chronic <strong>sleeplessness</strong>.</span> Through interpreter-assisted interviews, only 1.5% to 2.5% reported severe sleeping difficulties more than once a year—far below the 10% to 30% rate in industrialized nations. Siegel proposed that replicating elements of natural thermal and light environments could help alleviate modern sleep disorders.`,
+        trans: `Những người bộ lạc được nghiên cứu khác với người sống trong điều kiện hiện đại ở nhiều khía cạnh. Quan trọng là hầu như không ai trong số họ bị làm phiền bởi chứng mất ngủ (sleeplessness). Trong các cuộc phỏng vấn qua thông dịch viên, chỉ 1,5 đến 2,5% đối tượng cho biết họ gặp khó khăn nghiêm trọng khi ngủ hơn một lần mỗi năm—thấp hơn nhiều so với mức 10 đến 30% ở các nước công nghiệp. Siegel gợi ý rằng việc mô phỏng các khía cạnh của môi trường tự nhiên có thể giúp điều trị rối loạn giấc ngủ.`
+      },
+      {
+        label: "I",
+        text: `<span id="ev-q12">Additionally, the tribespeople enjoy superior physical health: none of the participants is <strong>overweight</strong>, reflecting high overall fitness.</span> <span id="ev-q13">They also maintain stronger, healthier <strong>hearts</strong>, raising the question of whether poor physical health causes modern fatigue rather than insufficient sleep causing poor health.</span>`,
+        trans: `Những người bộ lạc cũng khỏe mạnh hơn nhiều. Không một ai bị thừa cân (overweight), cho thấy mức độ thể chất tổng thể cao hơn. Họ cũng có xu hướng có trái tim (hearts) khỏe mạnh hơn. Từ đó đặt ra câu hỏi quan trọng: Nếu không thể đổ lỗi các vấn đề sức khỏe cho việc thiếu ngủ, liệu lý do chúng ta cảm thấy mệt mỏi có phải là vì sức khỏe kém?`
+      }
+    ],
+    glossary: [
+      ["dispel", "v", "xua tan, bác bỏ ~ refute / challenge"],
+      ["notion", "n", "quan niệm, ý niệm ~ assumption / belief"],
+      ["commute", "n/v", "di chuyển đi làm hàng ngày ~ daily travel"],
+      ["ancestors", "n", "tổ tiên ~ humans more than 10,000 years ago"],
+      ["pre-industrial", "adj", "tiền công nghiệp ~ hunter-gatherer"],
+      ["isolation", "n", "sự cô lập, tách biệt ~ cut off from"],
+      ["humid", "adj", "ẩm ướt ~ moist climate"],
+      ["efficiency", "n", "hiệu suất ~ ratio of sleep to time in bed"],
+      ["physical makeup", "n.phr", "cấu tạo sinh học/thể chất ~ biological nature"],
+      ["suppress", "v", "kìm nén, ức chế ~ hold back"],
+      ["circadian rhythm", "n.phr", "nhịp sinh học 24 giờ ~ daily activity cycle"],
+      ["dusk", "n", "lúc chạng vạng tối ~ sunset"],
+      ["sleeplessness", "n", "chứng mất ngủ ~ insomnia / difficulties sleeping"],
+      ["mimic", "v", "bắt chước, mô phỏng ~ imitate / replicate"],
+      ["overweight", "adj", "thừa cân, béo phì ~ obese"],
+      ["inhabitants", "n", "cư dân ~ populations / people living in"],
+      ["chronic", "adj", "mãn tính, kéo dài ~ persistent"]
+    ]
+  },
+  2: {
+    title: "Bristlecone Pines",
+    paragraphs: [
+      {
+        label: "A",
+        text: `<span id="ev-q17">High on the arid, wind-battered peaks of the Great Basin in the western US (above 3,000 meters), bristlecone pines (<em>Pinus longaeva, Pinus aristata</em>) thrive in severe habitats where no competing tree species can survive.</span> Though reaching at most 18.3 meters in height with a maximum trunk girth of 11.2 meters, <span id="ev-q18">their most extraordinary characteristic is their exceptional longevity: averaging over 1,000 years, with the oldest individual—Methuselah—dated at 4,723 years.</span> Their extreme age was uncovered in the 1950s by Edmund Schulman, who began his dendrochronology career in 1932 under A. E. Douglass at the University of Arizona.`,
+        trans: `Trên các đỉnh núi khô cằn, lộng gió của Great Basin ở miền tây Hoa Kỳ ở độ cao hơn 3.000m, thông bristlecone phát triển mạnh ở những nơi khắc nghiệt mà không loài cây nào khác muốn sinh sống. Chúng không cao lắm (tối đa 18,3m), chu vi lớn nhất 11,2m, nhưng điều làm nên sự phi thường thực sự của thông bristlecone là tuổi thọ (longevity/age): trung bình trên 1.000 năm, cá thể già nhất Methuselah đạt 4.723 năm. Tuổi thọ cực đại này được khám phá vào thập niên 1950 nhờ nỗ lực của Edmund Schulman.`
+      },
+      {
+        label: "B",
+        text: `<span id="ev-q14"><span id="ev-q19">Douglass observed that certain trees form wide growth rings during wet years and narrow rings during dry seasons (a lack of rain).</span></span> Greater environmental stress produces higher ring-to-ring variation, termed "sensitivity," whereas uniform growth is called "complacency." By matching overlapping ring sequences from living trees with older wood samples of unknown age, scientists construct extended climatic chronologies stretching far into the past.`,
+        trans: `Douglass nhận thấy các vòng gỗ rộng được tạo ra vào những năm ẩm ướt và ngược lại, các vòng gỗ hẹp hình thành vào mùa khô (thiếu mưa). Tốc độ tăng trưởng càng bị ảnh hưởng bởi môi trường thì sự biến thiên giữa các vòng càng lớn (gọi là độ nhạy - sensitivity), còn thiếu sự biến thiên gọi là complacency. Việc đối chiếu các mẫu vòng gỗ trùng khớp giúp mở rộng biên niên sử khí hậu lùi sâu về quá khứ.`
+      },
+      {
+        label: "C",
+        text: `<span id="ev-q20">Seeking older specimens to lengthen climate records, Schulman focused on stunted, twisted trees in upper-forest zones whose rings sensitively recorded drought.</span> <span id="ev-q16">Between 1954 and 1955, Schulman and his assistant C. W. Ferguson conducted an extensive survey of bristlecone stands from California to Colorado at altitudes of 3,048 to 3,354 meters on dolomite soils.</span> The oldest trees grew in the harshest spots with minimal soil and moisture, displaying large sections of deadwood alongside thin strips of living bark.`,
+        trans: `Trong hành trình tìm kiếm những cái cây cổ thụ hơn (much older) để mở rộng biên niên sử, Schulman tập trung vào những cây thấp, vặn vẹo ở vùng rừng phía trên. Trong năm 1954 và 1955, một cuộc khảo sát quy mô lớn về các quần thể thông bristlecone từ California đến Colorado đã được thực hiện bởi Schulman và trợ lý C. W. Ferguson ở độ cao 3.048 đến 3.354m trên đất dolomite. Những cây già nhất mọc ở điều kiện khắc nghiệt nhất với rất ít đất và độ ẩm.`
+      },
+      {
+        label: "D",
+        text: `What explains the bristlecone's remarkable lifespan in subalpine zones with only six to twelve warm weeks and just 25.4 cm of annual precipitation? <span id="ev-q21">First, its needles endure for 20 to 30 years, so growing replacement foliage demands <strong>little energy</strong> while maintaining steady photosynthesis.</span> <span id="ev-q22">Second, damaged trees allow gradual dieback so that a narrow strip of <strong>living bark</strong> (such as a 25 cm strip on 4,000-year-old Pine Alpha) sustains only the surviving crown.</span> <span id="ev-q23">Finally, their heavily <strong>resinous</strong> wood prevents attacks from bacteria, fungi, and insects.</span>`,
+        trans: `Những yếu tố nào giải thích cho tuổi thọ của thông bristlecone? Thứ nhất, lá kim của chúng có thể sống từ 20 đến 30 năm; do đó việc tạo thêm tán lá mới tốn rất ít năng lượng (little energy). Thứ hai là sự chết dần của vỏ cây khi bị hư hại do lửa, sét, hạn hán; ví dụ cây Pine Alpha hơn 4.000 năm tuổi chỉ cần một dải vỏ cây sống (living bark) rộng 25cm để nuôi phần ngọn còn sống. Cuối cùng, sự xâm nhập của vi khuẩn, nấm hoặc côn trùng không thể xảy ra nhờ gỗ chứa nhiều nhựa (resinous).`
+      },
+      {
+        label: "E",
+        text: `Habitat conditions further aid survival. <span id="ev-q24">The subalpine region's <strong>dry air</strong> prevents wood decay.</span> <span id="ev-q25"><span id="ev-q26">Moreover, because the trees grow far apart on barren dolomite soil with minimal leaf litter, the wide <strong>distance</strong> between trunks and the lack of <strong>ground cover</strong> stop lightning fires from spreading.</span></span> <span id="ev-q15">Today, the primary danger comes from human visitors; consequently, Methuselah's exact location is kept unmarked to protect it from vandalism.</span>`,
+        trans: `Các yếu tố môi trường cũng góp phần quan trọng. Không khí khô (dry air) phổ biến ở vùng núi cao giúp bảo quản cây khỏi bị mục nát. Tuổi thọ cao của lá kim và việc các thực vật khác không thể mọc trên đất dolomite tạo ra rất ít rác lá. Khoảng cách (distance) giữa các cây kết hợp với sự thiếu thảm thực vật che phủ mặt đất (ground cover) đảm bảo lửa do sét đánh không lan sang cây xung quanh. Mối đe dọa hiện nay đến từ con người tới tham quan; do đó cây Methuselah không được gắn biển đánh dấu để tránh nạn phá hoại (vandalism).`
+      }
+    ],
+    glossary: [
+      ["windswept", "adj", "lộng gió, bị gió quét ~ exposed to wind"],
+      ["altitude", "n", "độ cao so với mực nước biển ~ elevation / high levels"],
+      ["flourish", "v", "phát triển thịnh vượng ~ thrive"],
+      ["girth", "n", "chu vi thân cây ~ width / circumference"],
+      ["longevity", "n", "tuổi thọ cao ~ extreme age"],
+      ["dendrochronology", "n", "khoa học định tuổi qua vòng gỗ ~ tree-ring dating"],
+      ["inversely", "adv", "ngược lại ~ conversely"],
+      ["sensitivity", "n", "độ nhạy biến thiên vòng gỗ ~ ring variation"],
+      ["complacency", "n", "sự đồng đều vòng gỗ ~ lack of ring variability"],
+      ["chronology", "n", "biên niên sử, trình tự thời gian ~ time sequence"],
+      ["dwarfed", "adj", "còi cọc, lùn đi ~ stunted / short"],
+      ["scant", "adj", "hiếm hoi, ít ỏi ~ minimal / little"],
+      ["foliage", "n", "tán lá ~ needles / leaves"],
+      ["photosynthetic", "adj", "thuộc quang hợp ~ light-converting"],
+      ["dieback", "n", "sự chết khô dần từng phần ~ gradual tissue reduction"],
+      ["resinous", "adj", "chứa nhiều nhựa thông ~ rich in resin"],
+      ["vandalism", "n", "hành vi phá hoại tài sản ~ human danger / destruction"]
+    ]
+  },
+  3: {
+    title: "LOSS OF RARE LANGUAGES",
+    paragraphs: [
+      {
+        label: "A (Q27)",
+        text: `<em>"Obviously we must do some serious rethinking of our priorities, lest linguistics go down in history as the only science that presided obviously over the disappearance of 90 percent of the very field to which it is dedicated." – Michael Krauss</em><br><br><span id="ev-q27"><span id="ev-q35">A decade ago, linguist Michael Krauss alarmed the academic community by forecasting that half of the world's roughly 6,000 languages would fall silent within a hundred years, and up to 90% could face extinction without urgent intervention.</span></span> <span id="ev-q36">In the same publication, MIT's Kenneth L. Hale observed that eight languages he had personally researched in the field had already died out.</span> Surveys from the early 1990s confirmed that 70 of 90 surviving Australian Aboriginal tongues and 155 of 175 Native American languages in the US were no longer regularly spoken across all generations.`,
+        trans: `Mười năm trước, Michael Krauss đã làm chấn động ngành ngôn ngữ học với dự đoán rằng một nửa trong số khoảng 6.000 ngôn ngữ trên thế giới sẽ ngừng được nói trong vòng một thế kỷ, và 9/10 sự đa dạng ngôn ngữ có nguy cơ tuyệt chủng. Kenneth L. Hale thuộc MIT lưu ý trong cùng ấn phẩm rằng 8 ngôn ngữ mà ông từng trực tiếp đi thực địa nghiên cứu đã tuyệt chủng. Khảo sát năm 1990 tại Úc và Mỹ cũng cho thấy phần lớn ngôn ngữ bản địa không còn được sử dụng thường xuyên.`
+      },
+      {
+        label: "B (Q28)",
+        text: `<span id="ev-q28">Specialists lament the disappearance of minority tongues largely because these languages hold the key to fundamental scientific questions about the boundaries of human speech.</span> Examining a broad spectrum of diverse languages enables researchers to determine which grammatical and lexical structures are universal and biologically hardwired into the human brain, as well as to trace ancient human migrations through shared loanwords.`,
+        trans: `Nhiều chuyên gia thương tiếc sự mất mát của các ngôn ngữ hiếm vì lợi ích khoa học: những câu hỏi cơ bản nhất của ngôn ngữ học liên quan đến giới hạn tiếng nói con người. Các nhà nghiên cứu muốn biết yếu tố cấu trúc ngữ pháp và từ vựng nào mang tính phổ quát và được cài đặt sẵn trong não người, cũng như tái dựng mô hình di cư cổ đại qua từ vay mượn. Danh mục ngôn ngữ nghiên cứu càng rộng thì khả năng tìm ra câu trả lời đúng càng cao.`
+      },
+      {
+        label: "C (Example: vi)",
+        text: `<em>Example Heading: vi) A period when there was an absence of real efforts made.</em><br><br><span id="ev-q38">Despite widespread discussion over the past decade, concrete action was minimal; University of Michigan linguist Sarah G. Thomason noted the lack of any organized professional effort until working on endangered tongues recently became fashionable.</span> <span id="ev-q37">Douglas H. Whalen of Yale founded the Endangered Languages Fund (raising $80,000 over five years), while a comparable UK foundation led by Nicholas Ostler collected just $8,000 since 1995.</span>`,
+        trans: `(Đoạn ví dụ - Heading vi): Bất chấp những bàn tán liên tục trong 10 năm qua, lĩnh vực này đạt được rất ít thành tựu. Sarah G. Thomason (ĐH Michigan) nhận xét rằng không có nỗ lực có tổ chức nào trong ngành cho đến gần đây khi việc nghiên cứu ngôn ngữ nguy cấp trở nên hợp thời hơn. Quỹ của Douglas H. Whalen quyên góp được 80.000 đô la, còn một quỹ tương tự ở Anh do Nicholas Ostler điều hành chỉ quyên góp được 8.000 đô la từ năm 1995.`
+      },
+      {
+        label: "D (Q29)",
+        text: `<span id="ev-q29">Nevertheless, promising developments indicate positive momentum in preservation.</span> Germany's Volkswagen Foundation recently funded a multimedia archive at the Max Planck Institute in the Netherlands to store recordings, dictionaries, and grammars of threatened tongues like Aweti, Ega, and Waima'a. <span id="ev-q39">Meanwhile, the Ford Foundation supported Leanne Hinton's master-apprentice initiative in California, pairing fluent elders with younger relatives for 360 hours of immersion; Hinton notes that while it cannot outpace elder mortality, it successfully <strong>prolongs the survival of the language</strong> so linguists have more time to document them before they vanish.</span>`,
+        trans: `Nhưng có những dấu hiệu đáng khích lệ cho thấy lĩnh vực này đã khởi sắc. Quỹ Volkswagen (Đức) đã tài trợ xây dựng kho lưu trữ đa phương tiện tại Viện Max Planck (Hà Lan). Quỹ Ford cũng hỗ trợ chương trình thầy-trò (master-apprentice) do Leanne Hinton sáng lập tại California. Hinton thừa nhận còn quá sớm để gọi đây là sự hồi sinh ngôn ngữ vì tỷ lệ qua đời của người lớn tuổi vẫn cao hơn tỷ lệ người trẻ học, nhưng ít nhất chương trình giúp kéo dài sự tồn tại (trì hoãn ngày biến mất) của ngôn ngữ để các nhà ngôn ngữ học có thêm thời gian ghi chép lại.`
+      },
+      {
+        label: "E (Q30)",
+        text: `<span id="ev-q30">Yet small-scale mentoring is a drop in the ocean: at least 440 languages are now spoken by only a few elderly individuals, and most lack basic records of grammar or daily usage.</span> Even thorough academic documentation leaves behind merely a "fossil skeleton" unless researchers capture essential everyday interactions—such as how parents speak to infants or how spouses converse—which are the minimum prerequisites needed to truly revitalize a tongue.`,
+        trans: `Tuy nhiên phương pháp thầy-trò chỉ như muối bỏ bể. Ít nhất 440 ngôn ngữ chỉ còn vài người già nói và hầu như không có bản ghi ngữ pháp, từ vựng hay cách dùng hàng ngày. Ngay cả khi được ghi chép đầy đủ, những gì còn lại khi ngôn ngữ biến mất khỏi đời sống chỉ là một "bộ xương hóa thạch". Làm sao mọi người bắt đầu cuộc trò chuyện và nói với trẻ nhỏ? Vợ chồng trò chuyện thế nào? Đó là những điều tối thiểu đầu tiên bạn cần biết khi muốn hồi sinh một ngôn ngữ.`
+      },
+      {
+        label: "F (Q31)",
+        text: `<span id="ev-q31">Currently, there is no established field of "conservation linguistics" comparable to conservation biology, and because methods succeed in some regions but fail in others, experts cannot reliably predict which native language programs will work.</span> <span id="ev-q34">Twenty years ago in New Zealand, Maori speakers launched preschool "language nests" followed by Maori-only schooling; Joseph E. Grimes of SIL International reported that a similar immersion model in Hawaii stabilized native speakers at around 1,000 and extended Hawaiian instruction through university.</span>`,
+        trans: `Hiện vẫn chưa có ngành "ngôn ngữ học bảo tồn" như sinh học. Hầu hết mọi chiến lược được thử nghiệm đều thành công ở nơi này nhưng thất bại ở nơi khác, và dường như không có cách nào dự đoán chắc chắn phương pháp nào sẽ hiệu quả ở đâu. 20 năm trước ở New Zealand, người Maori lập các "tổ ngôn ngữ" cho trẻ mầm non. Joseph E. Grimes thuộc SIL International báo cáo rằng cách tiếp cận tương tự được thử ở Hawaii đã đạt một số thành công—số người bản ngữ ổn định ở mức khoảng 1.000 người.`
+      },
+      {
+        label: "G (Q32)",
+        text: `<span id="ev-q32">A recurring cause of language death is collective self-doubt among speakers regarding the value of maintaining their heritage tongue.</span> When communities view their language as inferior to the dominant tongue, usage declines and children adopt that negative attitude, favoring the majority language—explaining why Cornish, Scottish Gaelic dialects, and even Irish remain rarely spoken in daily family life.`,
+        trans: `Một yếu tố luôn xuất hiện trong sự suy tàn của ngôn ngữ là người nói bắt đầu nghi ngờ về tính hữu ích của lòng trung thành với ngôn ngữ. Khi họ coi ngôn ngữ của mình thấp kém hơn ngôn ngữ đa số, họ ngừng sử dụng nó. Trẻ em (người nói trẻ tuổi) tiếp thu thái độ thiếu tự tin đó và thích ngôn ngữ thống trị hơn. Nhiều bậc cha mẹ không nhận ra cho đến khi thấy con mình không bao giờ nói tiếng mẹ đẻ ngay cả ở nhà.`
+      },
+      {
+        label: "H (Q33)",
+        text: `<span id="ev-q33">Specialists concur that the ultimate solution to language extinction is widespread multilingualism, which children can effortlessly acquire early in life—as seen in Cameroon, Papua New Guinea, and India.</span> Conversely, monolingual majorities in the US, Canada, Australia, and Russia often react with hostility toward minority languages, where extinction rates are highest. <span id="ev-q40">Consequently, the essential initial step in rescuing endangered tongues is convincing majority populations to tolerate and permit minorities to speak in their own voices.</span>`,
+        trans: `Các nhà ngôn ngữ học đồng thuận rằng giải pháp cuối cùng cho vấn đề tuyệt chủng ngôn ngữ là đa ngôn ngữ. Tuy nhiên phần lớn người Mỹ, Canada, Úc và Nga lại có phản ứng tiêu cực khi nghe người khác nói ngôn ngữ khác trước mặt họ. Do đó, bước đầu tiên (khuyến nghị ban đầu) trong việc cứu các ngôn ngữ đang hấp hối là thuyết phục nhóm đa số trên thế giới bao dung hơn, cho phép các nhóm thiểu số cất tiếng nói bằng ngôn ngữ của chính họ.`
+      }
+    ],
+    glossary: [
+      ["preside over", "v.phr", "chứng kiến/chủ trì (sự suy tàn) ~ oversee"],
+      ["shudder", "n/v", "sự rùng mình, chấn động ~ shock / alarm"],
+      ["cease", "v", "ngừng, chấm dứt ~ stop"],
+      ["utter", "v", "thốt ra, nói ra ~ speak"],
+      ["doomed to extinction", "adj.phr", "cầm chắc sự tuyệt chủng ~ destined to die out"],
+      ["mourn", "v", "thương tiếc, than khóc ~ lament"],
+      ["hardwired", "adj", "được cài đặt bẩm sinh ~ innate in the brain"],
+      ["portfolio", "n", "danh mục, tập hợp ~ collection / range"],
+      ["dire", "adj", "thảm khốc, cấp bách ~ severe / urgent"],
+      ["turn a corner", "idiom", "vượt qua giai đoạn khó khăn, khởi sắc ~ show positive gains"],
+      ["reinvigorate", "v", "tiếp thêm sinh lực, làm sống lại ~ revitalize"],
+      ["imminent demise", "n.phr", "sự biến mất/tuyệt chủng sắp xảy ra ~ approaching death"],
+      ["prolong", "v", "kéo dài, trì hoãn ~ postpone / extend"],
+      ["drop in the sea", "idiom", "muối bỏ bể ~ tiny fraction"],
+      ["astute", "adj", "sắc sảo, nhạy bén ~ perceptive"],
+      ["immerse", "v", "nhúng chìm, hòa mình vào môi trường ~ surround completely"],
+      ["inferior", "adj", "thấp kém hơn ~ less valuable"],
+      ["consensus", "n", "sự đồng thuận ~ general agreement (linguists agree)"]
+    ]
+  }
+};
+
+/* ============================================================================
+   5. ALL 40 QUESTIONS WITH 4-STEP DETAILED EXPLANATIONS & EVIDENCE LINKS
+============================================================================ */
+const QUESTIONS = [
+  // ================= PASSAGE 1: Q1 - Q13 =================
+  {
+    id: 1, passage: 1, type: "tfng",
+    sectionTitle: "Questions 1–4: Choose TRUE, FALSE, or NOT GIVEN.",
+    prompt: "1. Scientists studied hunter-gatherer societies because their sleep patterns are assumed to be similar to those of humans more than 10,000 years ago.",
+    answer: "TRUE",
+    options: ["TRUE", "FALSE", "NOT GIVEN"],
+    step1: "Các nhà khoa học đã nghiên cứu các xã hội săn bắn hái lượm vì kiểu ngủ của họ được cho là tương tự như kiểu ngủ của con người cách đây hơn 10.000 năm.",
+    step2: [
+      { label: "TRUE", ok: true, text: "Đúng — Thông tin trong câu hỏi hoàn toàn trùng khớp với nội dung bài đọc." },
+      { label: "FALSE", ok: false, text: "Sai — Trái ngược với thông tin trong bài." },
+      { label: "NOT GIVEN", ok: false, text: "Không được đề cập trong bài đọc." }
+    ],
+    step3: "Đoạn B nêu rõ các xã hội tiền công nghiệp này được cho là ('are thought to' = 'are assumed to') có thói quen ngủ giống hệt con người cách đây hơn 10.000 năm ('sleep the way humans did more than 10,000 years ago'). Các từ đồng nghĩa: are assumed to ~ are thought to; sleep patterns ~ the way humans sleep.",
+    step4: "Loại FALSE vì bài đọc khẳng định trực tiếp mối tương đồng này; loại NOT GIVEN vì lý do chọn nhóm đối tượng nghiên cứu đã được nêu rõ ở Đoạn B.",
+    evidenceId: "ev-q1", para: "Đoạn B"
+  },
+  {
+    id: 2, passage: 1, type: "tfng",
+    prompt: "2. The medical devices used in the research were specially designed for humid conditions.",
+    answer: "NOT GIVEN",
+    options: ["TRUE", "FALSE", "NOT GIVEN"],
+    step1: "Các thiết bị y tế được sử dụng trong nghiên cứu được thiết kế đặc biệt cho các điều kiện ẩm ướt.",
+    step2: [
+      { label: "TRUE", ok: false, text: "Thông tin suy diễn, không có trong văn bản." },
+      { label: "FALSE", ok: false, text: "Không có thông tin phủ định việc thiết bị được thiết kế riêng." },
+      { label: "NOT GIVEN", ok: true, text: "Đúng — Bài đọc không hề đề cập việc thiết bị được thiết kế đặc biệt cho môi trường ẩm ướt." }
+    ],
+    step3: "Đoạn B có nhắc đến việc các nhà nghiên cứu đi tới những nơi ẩm ướt, xa xôi ('humid, remote locations') và sử dụng thiết bị y tế ('used medical devices'), nhưng hoàn toàn KHÔNG nói các thiết bị này được thiết kế đặc biệt ('specially designed') cho điều kiện ẩm ướt.",
+    step4: "Loại TRUE và FALSE vì bài đọc chỉ liệt kê địa điểm ẩm ướt và công cụ y tế độc lập, không có thông tin về thiết kế chuyên biệt của máy.",
+    evidenceId: "ev-q2", para: "Đoạn B"
+  },
+  {
+    id: 3, passage: 1, type: "tfng",
+    prompt: "3. Researchers found that tribespeople stayed longer in bed than inhabitants of industrialised regions.",
+    answer: "NOT GIVEN",
+    options: ["TRUE", "FALSE", "NOT GIVEN"],
+    step1: "Các nhà nghiên cứu phát hiện ra rằng người thuộc các bộ lạc nằm trên giường lâu hơn cư dân ở các khu vực công nghiệp hóa.",
+    step2: [
+      { label: "TRUE", ok: false, text: "Nhầm lẫn giữa so sánh 'thời gian trên giường vs thời gian ngủ thực tế' với so sánh giữa 2 nhóm dân cư." },
+      { label: "FALSE", ok: false, text: "Không có số liệu giờ nằm trên giường cụ thể của cư dân công nghiệp để kết luận ai lâu hơn." },
+      { label: "NOT GIVEN", ok: true, text: "Đúng — Bài chỉ nói cả hai nhóm đều nằm trên giường lâu hơn thời gian ngủ thực, chứ không so sánh tổng thời gian trên giường giữa bộ lạc và người hiện đại." }
+    ],
+    step3: "Đoạn C viết: 'Giống như nhiều người trong chúng ta, người Hadza, San và Tsimane dành nhiều thời gian trên giường hơn (6,9–8,5 giờ) so với thời gian họ thực sự ngủ'. Bài chỉ so sánh (thời gian nằm trên giường > thời gian thực ngủ), hoàn toàn không so sánh người bộ lạc nằm trên giường lâu hơn cư dân công nghiệp.",
+    step4: "Cẩn thận bẫy so sánh hơn ('stayed longer in bed than inhabitants...'). Trong bài so sánh thời gian trên giường với thời gian ngủ thực tế ('more time in bed... than they do actually sleeping').",
+    evidenceId: "ev-q3", para: "Đoạn C"
+  },
+  {
+    id: 4, passage: 1, type: "tfng",
+    prompt: "4. Jerome Siegel believes that environment and culture have little effect on sleep patterns.",
+    answer: "TRUE",
+    options: ["TRUE", "FALSE", "NOT GIVEN"],
+    step1: "Jerome Siegel tin rằng môi trường và văn hóa có rất ít ảnh hưởng đến kiểu ngủ.",
+    step2: [
+      { label: "TRUE", ok: true, text: "Đúng — Siegel khẳng định thói quen ngủ không mang tính môi trường hay văn hóa mà thuộc về cấu tạo sinh học cốt lõi." },
+      { label: "FALSE", ok: false, text: "Sai với phát biểu của Jerome Siegel ở đầu đoạn D." },
+      { label: "NOT GIVEN", ok: false, text: "Thông tin có xuất hiện rõ ở câu đầu đoạn D." }
+    ],
+    step3: "Đoạn D nêu rõ: 'Theo Jerome Siegel... bằng chứng cho thấy thói quen ngủ có thể không phụ thuộc vào môi trường hay văn hóa, mà nằm ở cấu tạo thể chất cốt lõi của con người' (sleep habits may not be environmental or cultural, but central to the physical makeup of humans ~ have little effect).",
+    step4: "Lưu ý trong tờ đáp án gốc có ghi 'NG/True' (chấp nhận cả hai tùy cách hiểu mức độ tuyệt đối), hệ thống ưu tiên chấm TRUE theo sát câu chủ đề đoạn D và vẫn ghi chú rõ cho học sinh.",
+    evidenceId: "ev-q4", para: "Đoạn D"
+  },
+  {
+    id: 5, passage: 1, type: "gap",
+    sectionTitle: "Questions 5–13: Complete the notes below. Write ONE WORD ONLY from the passage for each answer.",
+    prompt: "New ideas about napping: scientists have recorded an afternoon drop in 5 ....................",
+    answer: "energy",
+    step1: "Ý tưởng mới về giấc ngủ trưa: các nhà khoa học đã ghi nhận sự sụt giảm vào buổi chiều về mức [năng lượng].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "energy (n): năng lượng (Sau giới từ 'in' cần một danh từ chỉ thứ bị suy giảm vào buổi chiều)." },
+      { label: "Từ đồng nghĩa", ok: false, text: "recorded ~ documented; afternoon ~ mid-afternoon; drop ~ falls." }
+    ],
+    step3: "Đoạn D viết: 'Scientists have documented that people's energy often falls in the mid-afternoon.' (Các nhà khoa học đã ghi nhận rằng năng lượng của con người thường sụt giảm vào giữa buổi chiều). Do đó từ duy nhất cần điền là 'energy'.",
+    step4: "Các từ khác như 'sleep' hoặc 'desire' không đi với động từ 'falls in the mid-afternoon'.",
+    evidenceId: "ev-q5", para: "Đoạn D"
+  },
+  {
+    id: 6, passage: 1, type: "gap",
+    prompt: "studies of hunter-gatherer societies show that napping was rare and occurred more often during the 6 ....................",
+    answer: "summer",
+    step1: "Các nghiên cứu về xã hội săn bắn hái lượm chỉ ra rằng ngủ trưa rất hiếm và xảy ra thường xuyên hơn vào [mùa hè].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "summer (n): mùa hè (22% số ngày mùa hè so với 7% số ngày mùa đông)." },
+      { label: "Bẫy phương án", ok: false, text: "winter (mùa đông chỉ chiếm 7%, thấp hơn mùa hè 22%)." }
+    ],
+    step3: "Đoạn E viết: 'The researchers estimated that naps may have occurred on up to 7 percent of winter days and 22 percent of summer days.' Vì 22% > 7% nên giấc ngủ trưa diễn ra thường xuyên hơn ('occurred more often') vào mùa hè ('summer').",
+    step4: "Không điền 'winter' vì câu hỏi hỏi mùa nào xảy ra thường xuyên hơn ('more often').",
+    evidenceId: "ev-q6", para: "Đoạn E"
+  },
+  {
+    id: 7, passage: 1, type: "gap",
+    prompt: "the devices may not have detected 7 .................... naps",
+    answer: "short",
+    step1: "Các thiết bị có thể đã không phát hiện được những giấc ngủ trưa [ngắn].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "short (adj): ngắn (đứng trước danh từ 'naps' để bổ nghĩa)." },
+      { label: "Bẫy phương án", ok: false, text: "longer (thiết bị phát hiện TỐT các giấc ngủ dài, còn câu hỏi hỏi những giấc ngủ KHÔNG phát hiện được)." }
+    ],
+    step3: "Đoạn E nêu: 'their devices were only good at detecting longer naps, so it is possible that some of the study subjects took naps that were short, perhaps 15 minutes or less.' Vì máy chỉ nhận diện tốt giấc ngủ dài nên có thể đã bỏ sót các giấc ngủ ngắn ('short').",
+    step4: "Chỉ được điền 1 từ duy nhất (ONE WORD ONLY) là tính từ 'short'.",
+    evidenceId: "ev-q7", para: "Đoạn E"
+  },
+  {
+    id: 8, passage: 1, type: "gap",
+    prompt: "Daily activity cycles: the tribespeople went to sleep several hours after sunset even with 8 .................... there was little light",
+    answer: "fires",
+    step1: "Chu kỳ hoạt động hàng ngày: người bộ lạc đi ngủ vài giờ sau khi mặt trời lặn ngay cả khi có [lửa] thì ánh sáng vẫn rất yếu.",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "fires (n - số nhiều): những đống lửa." },
+      { label: "Từ đồng nghĩa", ok: false, text: "several hours after sunset ~ between 2.5 and 4.4 hours after sunset; little light ~ light itself was much lower." }
+    ],
+    step3: "Đoạn F viết: 'All three tribes had fires going, but the light itself was much lower than you might get from a light bulb.' Do đó danh từ điền sau giới từ 'with' là 'fires'.",
+    step4: "Lưu ý giữ nguyên dạng số nhiều 'fires' như trong bài đọc.",
+    evidenceId: "ev-q8", para: "Đoạn F"
+  },
+  {
+    id: 9, passage: 1, type: "gap",
+    prompt: "tribespeople usually woke up around 9 ....................",
+    answer: "sunrise",
+    step1: "Người bộ lạc thường thức dậy vào khoảng lúc [mặt trời mọc].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "sunrise (n): lúc bình minh / mặt trời mọc." },
+      { label: "Từ đồng nghĩa", ok: false, text: "usually ~ have a tendency to; around ~ anywhere between an hour before and an hour after." }
+    ],
+    step3: "Câu cuối Đoạn F nêu rõ: 'They did, however, have a tendency to wake up anywhere between an hour before and an hour after sunrise.' (Họ có xu hướng thức dậy trong khoảng 1 tiếng trước và sau khi mặt trời mọc = around sunrise).",
+    step4: "Không điền 'sunset' hay 'dusk' vì đó là thời điểm buổi tối.",
+    evidenceId: "ev-q9", para: "Đoạn F"
+  },
+  {
+    id: 10, passage: 1, type: "gap",
+    prompt: "scientists found that 10 .................... had almost as much influence on sleep patterns as light",
+    answer: "temperature",
+    step1: "Các nhà khoa học phát hiện ra rằng [nhiệt độ] có ảnh hưởng gần như lớn ngang bằng ánh sáng đối với kiểu ngủ.",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "temperature (n): nhiệt độ (đóng vai trò chủ ngữ của mệnh đề)." },
+      { label: "Từ đồng nghĩa", ok: false, text: "almost as much influence as light ~ played a big role, though it was somewhat less important than light." }
+    ],
+    step3: "Đoạn G viết: 'Siegel and his co-authors investigated this further by looking into the significance of temperature. They found that it also played a big role, though it was somewhat less important than light in influencing sleep patterns.'",
+    step4: "Điền danh từ 'temperature' đúng chính tả.",
+    evidenceId: "ev-q10", para: "Đoạn G"
+  },
+  {
+    id: 11, passage: 1, type: "gap",
+    prompt: "Differences between tribespeople and people in industrialised regions: 11 .................... is something that very few of the tribespeople suffered from",
+    answer: "sleeplessness",
+    step1: "Sự khác biệt giữa người bộ lạc và người ở vùng công nghiệp: [chứng mất ngủ] là điều mà rất ít người bộ lạc mắc phải.",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "sleeplessness (n): chứng mất ngủ (chủ ngữ số ít đi với động từ 'is')." },
+      { label: "Từ đồng nghĩa", ok: false, text: "very few ~ almost none of them / only 1.5 to 2.5 percent; suffered from ~ were troubled by." }
+    ],
+    step3: "Đoạn H viết: 'Importantly, almost none of them were troubled by sleeplessness.' (Hầu như không ai trong số họ bị làm phiền bởi chứng mất ngủ). Do đó từ cần điền là 'sleeplessness'.",
+    step4: "Không điền 'sleep disorders' vì đề bài yêu cầu ONE WORD ONLY (1 từ duy nhất).",
+    evidenceId: "ev-q11", para: "Đoạn H"
+  },
+  {
+    id: 12, passage: 1, type: "gap",
+    prompt: "tribespeople had better fitness than industrialised populations and were not 12 ....................",
+    answer: "overweight",
+    step1: "Người bộ lạc có thể lực tốt hơn cư dân công nghiệp và không bị [thừa cân].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "overweight (adj): thừa cân (đứng sau động từ to be 'were not')." },
+      { label: "Từ đồng nghĩa", ok: false, text: "better fitness ~ higher levels of physical fitness; were not ~ Not a single one is." }
+    ],
+    step3: "Đoạn I viết: 'Not a single one is overweight, indicating their overall higher levels of physical fitness.' (Không một ai bị thừa cân, cho thấy mức độ thể lực tổng thể cao hơn của họ).",
+    step4: "Điền tính từ 'overweight'.",
+    evidenceId: "ev-q12", para: "Đoạn I"
+  },
+  {
+    id: 13, passage: 1, type: "gap",
+    prompt: "tribespeople also had stronger 13 ....................",
+    answer: "hearts",
+    step1: "Người bộ lạc cũng có [trái tim] khỏe mạnh hơn.",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "hearts (n - số nhiều): những trái tim / hệ tim mạch." },
+      { label: "Từ đồng nghĩa", ok: false, text: "stronger ~ healthier." }
+    ],
+    step3: "Đoạn I nêu: 'They also tended to have healthier hearts.' (Họ cũng có xu hướng có trái tim khỏe mạnh hơn). Sau tính từ so sánh hơn 'stronger' cần danh từ 'hearts'.",
+    step4: "Giữ nguyên danh từ số nhiều 'hearts' như trong văn bản gốc.",
+    evidenceId: "ev-q13", para: "Đoạn I"
+  },
+
+  // ================= PASSAGE 2: Q14 - Q26 =================
+  {
+    id: 14, passage: 2, type: "match",
+    sectionTitle: "Questions 14–17: Which paragraph (A–E) contains the following information?",
+    prompt: "14. an explanation of differences in ring patterns",
+    answer: "B",
+    options: ["A", "B", "C", "D", "E"],
+    step1: "Một lời giải thích về sự khác biệt trong các kiểu vòng gỗ của cây.",
+    step2: [
+      { label: "Paragraph B", ok: true, text: "Giải thích rõ vòng gỗ rộng hình thành vào năm ẩm ướt và vòng gỗ hẹp vào mùa khô hạn, cùng khái niệm sensitivity và complacency." },
+      { label: "Paragraph A, C, D, E", ok: false, text: "Đoạn A giới thiệu chung; Đoạn C nói về khảo sát thực địa; Đoạn D & E nói về yếu tố sinh tồn của cây." }
+    ],
+    step3: "Đoạn B giải thích nguyên nhân tạo ra sự khác biệt giữa các vòng gỗ: 'wide rings of certain species of trees were produced during wet years and, inversely, narrow rings during dry seasons... This variation is referred to as sensitivity and the lack of ring variability is called complacency.'",
+    step4: "Các đoạn khác không phân tích cơ chế hình thành độ rộng/hẹp của vòng gỗ.",
+    evidenceId: "ev-q14", para: "Đoạn B"
+  },
+  {
+    id: 15, passage: 2, type: "match",
+    prompt: "15. mention of a human danger to bristlecone pines",
+    answer: "E",
+    options: ["A", "B", "C", "D", "E"],
+    step1: "Sự đề cập đến một mối nguy hiểm do con người gây ra đối với thông bristlecone.",
+    step2: [
+      { label: "Paragraph E", ok: true, text: "Đề cập mối đe dọa hiện tại đến từ du khách tham quan và nguy cơ phá hoại (vandalism)." },
+      { label: "Paragraph D", ok: false, text: "Đoạn D chỉ nhắc tới thiên tai (lửa, sét, hạn hán, bão) và sâu bệnh (vi khuẩn, nấm, côn trùng), không có con người." }
+    ],
+    step3: "Cuối Đoạn E nêu rõ: 'The current threat is from all the people who come to visit them. As a result, Methuselah, the oldest tree, is not marked or identified with a plaque due to the threat of vandalism.' (human danger ~ threat from people / vandalism).",
+    step4: "Loại D vì D chỉ nói về các mối đe dọa tự nhiên.",
+    evidenceId: "ev-q15", para: "Đoạn E"
+  },
+  {
+    id: 16, passage: 2, type: "match",
+    prompt: "16. an account of research conducted on bristlecone pines",
+    answer: "C",
+    options: ["A", "B", "C", "D", "E"],
+    step1: "Một bản tường thuật về cuộc nghiên cứu/khảo sát được thực hiện trên cây thông bristlecone.",
+    step2: [
+      { label: "Paragraph C", ok: true, text: "Tường thuật chi tiết cuộc khảo sát quy mô lớn năm 1954–1955 của Schulman và trợ lý C. W. Ferguson từ California đến Colorado." },
+      { label: "Paragraph A", ok: false, text: "Đoạn A chỉ nhắc tên Schulman và năm bắt đầu sự nghiệp 1932, chưa mô tả quá trình khảo sát thực địa." }
+    ],
+    step3: "Đoạn C mô tả chi tiết quá trình khảo sát: 'During 1954 and 1955, an extensive survey of bristlecone stands from California to Colorado was carried out by Schulman and his assistant, C. W. Ferguson.' (research conducted ~ extensive survey was carried out).",
+    step4: "Loại A và B vì không mô tả cuộc khảo sát thực tế trên các quần thể thông bristlecone.",
+    evidenceId: "ev-q16", para: "Đoạn C"
+  },
+  {
+    id: 17, passage: 2, type: "match",
+    prompt: "17. an advantage of the bristlecone pines' habitat",
+    answer: "A",
+    options: ["A", "B", "C", "D", "E"],
+    step1: "Một lợi thế của môi trường sống của loài thông bristlecone.",
+    step2: [
+      { label: "Paragraph A", ok: true, text: "Đoạn A nêu thông bristlecone thích nghi với những nơi không loài cây nào khác muốn sống, và phát triển thịnh vượng (flourished) không bị cạnh tranh (Đoạn E cũng bổ sung lợi thế không khí khô và chống cháy lan)." },
+      { label: "Paragraph B, C, D", ok: false, text: "Không tập trung mô tả lợi thế môi trường sống giúp cây tránh sự cạnh tranh hoặc bảo vệ cây." }
+    ],
+    step3: "Đoạn A viết: 'The bristlecone has adjusted to places on earth that no other tree wants to inhabit, and in these harsh environments has flourished.' (Theo đáp án chuẩn câu 17 là A; ngoài ra Đoạn E cũng nêu lợi thế môi trường không khí khô và khoảng cách chống cháy).",
+    step4: "Chốt đáp án A theo đúng bảng key gốc của đề thi.",
+    evidenceId: "ev-q17", para: "Đoạn A"
+  },
+  {
+    id: 18, passage: 2, type: "mcq",
+    sectionTitle: "Questions 18–20: Choose the correct answer A, B, C, or D.",
+    prompt: "18. According to the writer, the most interesting fact about bristlecone pines is their",
+    answer: "D",
+    options: [
+      { letter: "A", text: "habitat." },
+      { letter: "B", text: "height." },
+      { letter: "C", text: "width." },
+      { letter: "D", text: "age." }
+    ],
+    step1: "Theo tác giả, sự thật thú vị/đáng kinh ngạc nhất về loài thông bristlecone là [tuổi thọ/độ tuổi] của chúng.",
+    step2: [
+      { label: "Gốc A", ok: false, text: "habitat (n): môi trường sống (chỉ là bối cảnh mở đầu)." },
+      { label: "Gốc B", ok: false, text: "height (n): chiều cao (chúng không cao lắm, tối đa 18,3m)." },
+      { label: "Gốc C", ok: false, text: "width (n): chiều rộng/chu vi (tối đa 11,2m, không phải điều phi thường nhất)." },
+      { label: "Gốc D", ok: true, text: "age (n): tuổi thọ (~ longevity: trung bình trên 1.000 năm, cây già nhất 4.723 năm)." }
+    ],
+    step3: "Đoạn A khẳng định: 'What makes bristlecone pines truly remarkable is their longevity: their average age is over 1,000 years, with the oldest specimen - an individual known as Methuselah - dated at 4,723 years.' Cụm 'truly remarkable' đồng nghĩa với 'the most interesting fact', và 'longevity' đồng nghĩa với 'age'.",
+    step4: "Loại A, B, C vì chiều cao và chu vi được nêu trước đó chỉ để làm nền đối lập với điểm phi thường thực sự là tuổi thọ (age).",
+    evidenceId: "ev-q18", para: "Đoạn A"
+  },
+  {
+    id: 19, passage: 2, type: "mcq",
+    prompt: "19. A pattern of narrow rings is caused by",
+    answer: "B",
+    options: [
+      { letter: "A", text: "alternating rainy and dry seasons." },
+      { letter: "B", text: "a lack of rain." },
+      { letter: "C", text: "restricted growth in some trees." },
+      { letter: "D", text: "high altitude." }
+    ],
+    step1: "Kiểu vòng gỗ hẹp được gây ra bởi [sự thiếu mưa / mùa khô].",
+    step2: [
+      { label: "Gốc A", ok: false, text: "alternating rainy and dry seasons: các mùa mưa và khô xen kẽ (tạo ra cả vòng rộng lẫn vòng hẹp)." },
+      { label: "Gốc B", ok: true, text: "a lack of rain: sự thiếu mưa (~ dry seasons: mùa khô)." },
+      { label: "Gốc C", ok: false, text: "restricted growth in some trees: sự tăng trưởng hạn chế (đây là hệ quả, không phải nguyên nhân thời tiết)." },
+      { label: "Gốc D", ok: false, text: "high altitude: độ cao lớn (không phải nguyên nhân trực tiếp tạo vòng hẹp theo mùa)." }
+    ],
+    step3: "Câu đầu Đoạn B viết: 'Douglass had noted that the wide rings of certain species of trees were produced during wet years and, inversely, narrow rings during dry seasons.' Mùa khô ('dry seasons') đồng nghĩa với việc thiếu mưa ('a lack of rain').",
+    step4: "Loại A vì mùa mưa tạo vòng rộng ('wide rings'); câu hỏi chỉ hỏi nguyên nhân tạo vòng hẹp ('narrow rings').",
+    evidenceId: "ev-q19", para: "Đoạn B"
+  },
+  {
+    id: 20, passage: 2, type: "mcq",
+    prompt: "20. Schulman chose to study trees growing at high levels because they were",
+    answer: "C",
+    options: [
+      { letter: "A", text: "shorter than similar trees." },
+      { letter: "B", text: "growing in unusual shapes." },
+      { letter: "C", text: "much older than other trees." },
+      { letter: "D", text: "the only surviving plants." }
+    ],
+    step1: "Schulman đã chọn nghiên cứu những cái cây mọc ở vùng núi cao vì chúng [già hơn nhiều so với những cây khác].",
+    step2: [
+      { label: "Gốc A", ok: false, text: "shorter than similar trees: thấp hơn các cây tương tự (chỉ là đặc điểm hình thái 'short', không phải mục đích tìm kiếm)." },
+      { label: "Gốc B", ok: false, text: "growing in unusual shapes: mọc với hình dáng kỳ lạ ('distorted', chỉ là mô tả bề ngoài)." },
+      { label: "Gốc C", ok: true, text: "much older than other trees: cổ thụ/già hơn nhiều so với các cây khác (~ In his search for older trees)." },
+      { label: "Gốc D", ok: false, text: "the only surviving plants: thực vật duy nhất sống sót (đây là kết quả quan sát trên đất dolomite sau đó)." }
+    ],
+    step3: "Câu mở đầu Đoạn C chỉ rõ mục đích của Schulman: 'In his search for older trees that would provide more extensive chronologies, Schulman learned that certain species of trees in the upper-forest zones... were now his focus.' Ông chọn vùng rừng trên cao ('upper-forest zones' = 'high levels') vì đang tìm kiếm những cây già hơn ('older trees').",
+    step4: "Loại A và B vì 'short, distorted, and dwarfed' chỉ là mô tả diện mạo của các cây đó chứ không phải lý do khoa học khiến ông tìm kiếm chúng.",
+    evidenceId: "ev-q20", para: "Đoạn C"
+  },
+  {
+    id: 21, passage: 2, type: "gap",
+    sectionTitle: "Questions 21–26: Complete the notes below. Write NO MORE THAN TWO WORDS from the passage for each answer.",
+    prompt: "a. features of bristlecone pines: making new needles requires 21 ....................",
+    answer: "little energy",
+    step1: "Đặc điểm của thông bristlecone: việc tạo ra lá kim mới đòi hỏi [rất ít năng lượng].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "little energy: ít năng lượng (tối đa 2 từ theo yêu cầu NO MORE THAN TWO WORDS)." },
+      { label: "Từ đồng nghĩa", ok: false, text: "making new needles ~ adding new foliage; requires ~ takes." }
+    ],
+    step3: "Đoạn D viết: 'Firstly, bristlecone needles can live twenty to thirty years; thus, adding new foliage to that already on the tree takes little energy.' (adding new foliage = making new needles; takes = requires -> little energy).",
+    step4: "Điền đủ 2 từ 'little energy' để đảm bảo chính xác ngữ nghĩa.",
+    evidenceId: "ev-q21", para: "Đoạn D"
+  },
+  {
+    id: 22, passage: 2, type: "gap",
+    prompt: "trees damaged by weather or fire can exist with only small areas of 22 ....................",
+    answer: "living bark",
+    step1: "Những cây bị hư hại do thời tiết hoặc hỏa hoạn có thể tồn tại chỉ với những diện tích nhỏ [vỏ cây còn sống].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "living bark: phần vỏ cây còn sống." },
+      { label: "Từ đồng nghĩa", ok: false, text: "damaged by weather or fire ~ damaged because of fire, lightning, drought, or storms; small areas of ~ a 25 cm strip of." }
+    ],
+    step3: "Đoạn D viết: 'Another strategy for surviving is the gradual dieback of living bark when the tree is damaged because of fire, lightning, drought, or storms... Pine Alpha, at over 4,000 years old, is over a metre in diameter, yet has only a 25 cm strip of living bark to support it.'",
+    step4: "Điền cụm danh từ 2 từ 'living bark'.",
+    evidenceId: "ev-q22", para: "Đoạn D"
+  },
+  {
+    id: 23, passage: 2, type: "gap",
+    prompt: "bristlecone wood is very 23 ....................",
+    answer: "resinous",
+    step1: "Gỗ thông bristlecone có rất nhiều [nhựa].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "resinous (adj): chứa nhiều nhựa (đứng sau trạng từ 'very')." },
+      { label: "Từ đồng nghĩa", ok: false, text: "very resinous ~ highly resinous wood." }
+    ],
+    step3: "Câu cuối Đoạn D viết: 'Finally, invasions from bacteria, fungi, or insects that prey upon most plants are unknown to the bristlecones due to their highly resinous wood.' (very = highly -> điền tính từ 'resinous').",
+    step4: "Không điền 'wood' vì từ 'wood' đã có sẵn làm chủ ngữ trong câu hỏi.",
+    evidenceId: "ev-q23", para: "Đoạn D"
+  },
+  {
+    id: 24, passage: 2, type: "gap",
+    prompt: "b. features of the environment: trees don't decay because of the 24 ....................",
+    answer: "dry air",
+    step1: "Đặc điểm của môi trường: cây không bị mục nát nhờ có [không khí khô].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "dry air: không khí khô (đứng sau mạo từ 'the')." },
+      { label: "Từ đồng nghĩa", ok: false, text: "don't decay ~ preserve the trees from rotting." }
+    ],
+    step3: "Đoạn E viết: 'The dry air common in the subalpine region helps preserve the trees from rotting.' (preserve from rotting = don't decay -> nguyên nhân là 'dry air').",
+    step4: "Điền đúng cụm 2 từ 'dry air'.",
+    evidenceId: "ev-q24", para: "Đoạn E"
+  },
+  {
+    id: 25, passage: 2, type: "gap",
+    prompt: "fires don't spread easily because of the 25 .................... between trees",
+    answer: "distance",
+    step1: "Đám cháy không lan rộng dễ dàng nhờ vào [khoảng cách] giữa các cây.",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "distance (n) (hoặc space): khoảng cách." },
+      { label: "Từ đồng nghĩa", ok: false, text: "fires don't spread ~ the fire does not spread to surrounding trees." }
+    ],
+    step3: "Đoạn E viết: 'This distance in between, combined with the lack of ground cover, ensures that if a tree sustains a lightning strike and catches fire, the fire does not spread to surrounding trees.' Do có sẵn cụm 'between trees' nên danh từ chính xác nhất đứng sau 'the' là 'distance'.",
+    step4: "Điền 1 từ 'distance'.",
+    evidenceId: "ev-q25", para: "Đoạn E"
+  },
+  {
+    id: 26, passage: 2, type: "gap",
+    prompt: "...and absence of 26 ....................",
+    answer: "ground cover",
+    step1: "...và sự vắng mặt/thiếu hụt của [lớp thực vật che phủ mặt đất].",
+    step2: [
+      { label: "Từ cần điền", ok: true, text: "ground cover: thảm thực vật che phủ mặt đất (hoặc leaf litter)." },
+      { label: "Từ đồng nghĩa", ok: false, text: "absence of ~ lack of." }
+    ],
+    step3: "Trong cùng câu ở Đoạn E: 'This distance in between, combined with the lack of ground cover, ensures that... the fire does not spread to surrounding trees.' Cụm 'lack of ground cover' tương ứng trực tiếp với 'absence of ground cover'.",
+    step4: "Điền cụm 2 từ 'ground cover'.",
+    evidenceId: "ev-q26", para: "Đoạn E"
+  },
+
+  // ================= PASSAGE 3: Q27 - Q40 =================
+  {
+    id: 27, passage: 3, type: "match",
+    sectionTitle: "Questions 27–33: Choose the correct heading (i–xi) for each paragraph.",
+    prompt: "27. Paragraph A (First main paragraph after quote)",
+    answer: "v",
+    options: [
+      "i) Inadequate data",
+      "ii) Consensus on an Initial recommendation for saving dying out languages",
+      "iii) Positive gains in protection efforts",
+      "iv) Minimum requirement for saving a language",
+      "v) Potential threat to minority languages",
+      "vi) A period when there was an absence of real efforts made",
+      "vii) Uncertainty about the success of native language programs",
+      "viii) Lack in confidence in young speakers as a negative factor",
+      "ix) Practice in several developing countries",
+      "x) Value of minority languages to linguists",
+      "xi) Government participation in language field"
+    ],
+    step1: "Chọn tiêu đề cho Đoạn A (Câu 27): [v) Nguy cơ tiềm tàng đối với các ngôn ngữ thiểu số].",
+    step2: [
+      { label: "Heading v (Đáp án đúng)", ok: true, text: "v) Potential threat to minority languages: Nêu dự đoán của Krauss và số liệu khảo sát về nguy cơ tuyệt chủng hàng loạt của các ngôn ngữ bản địa." },
+      { label: "Các Heading khác", ok: false, text: "Heading x nói về giá trị đối với nhà ngôn ngữ học (thuộc đoạn sau); Heading vi đã làm ví dụ." }
+    ],
+    step3: "Đoạn A tập trung cảnh báo mối đe dọa tuyệt chủng đối với các ngôn ngữ thiểu số: dự đoán 50% đến 90% ngôn ngữ sẽ biến mất, cùng thống kê 70/90 ngôn ngữ thổ dân Úc và 155/175 ngôn ngữ bản địa Mỹ đang mai một ('doomed to extinction' ~ 'potential threat to minority languages').",
+    step4: "Loại các tiêu đề khác vì đoạn này thuần túy đưa ra lời cảnh báo và thống kê về mối đe dọa suy giảm ngôn ngữ.",
+    evidenceId: "ev-q27", para: "Đoạn A (Q27)"
+  },
+  {
+    id: 28, passage: 3, type: "match",
+    prompt: "28. Paragraph B (Second paragraph)",
+    answer: "x",
+    options: [
+      "i) Inadequate data",
+      "ii) Consensus on an Initial recommendation for saving dying out languages",
+      "iii) Positive gains in protection efforts",
+      "iv) Minimum requirement for saving a language",
+      "v) Potential threat to minority languages",
+      "vi) A period when there was an absence of real efforts made",
+      "vii) Uncertainty about the success of native language programs",
+      "viii) Lack in confidence in young speakers as a negative factor",
+      "ix) Practice in several developing countries",
+      "x) Value of minority languages to linguists",
+      "xi) Government participation in language field"
+    ],
+    step1: "Chọn tiêu đề cho Đoạn B (Câu 28): [x) Giá trị của các ngôn ngữ thiểu số đối với các nhà ngôn ngữ học].",
+    step2: [
+      { label: "Heading x (Đáp án đúng)", ok: true, text: "x) Value of minority languages to linguists: Giải thích lý do các nhà ngôn ngữ học cần ngôn ngữ hiếm để hiểu cấu trúc não bộ và lịch sử di cư." },
+      { label: "Các Heading khác", ok: false, text: "Không phản ánh đúng mục đích nghiên cứu khoa học của giới ngôn ngữ học." }
+    ],
+    step3: "Đoạn B mở đầu bằng: 'Many experts in the field mourn the loss of rare languages, for several reasons. To start, there is scientific self-interest...' sau đó liệt kê giá trị của ngôn ngữ hiếm trong việc tìm ra quy luật ngữ pháp phổ quát và dấu vết di cư cổ đại.",
+    step4: "Cụm 'scientific self-interest' và lợi ích giải đáp các câu hỏi cốt lõi của ngành khớp hoàn toàn với 'Value of minority languages to linguists'.",
+    evidenceId: "ev-q28", para: "Đoạn B (Q28)"
+  },
+  {
+    id: 29, passage: 3, type: "match",
+    prompt: "29. Paragraph D (Paragraph starting 'But there are encouraging signs...')",
+    answer: "iii",
+    options: [
+      "i) Inadequate data",
+      "ii) Consensus on an Initial recommendation for saving dying out languages",
+      "iii) Positive gains in protection efforts",
+      "iv) Minimum requirement for saving a language",
+      "v) Potential threat to minority languages",
+      "vi) A period when there was an absence of real efforts made",
+      "vii) Uncertainty about the success of native language programs",
+      "viii) Lack in confidence in young speakers as a negative factor",
+      "ix) Practice in several developing countries",
+      "x) Value of minority languages to linguists",
+      "xi) Government participation in language field"
+    ],
+    step1: "Chọn tiêu đề cho Đoạn D (Câu 29): [iii) Những kết quả/tiến triển tích cực trong nỗ lực bảo vệ ngôn ngữ].",
+    step2: [
+      { label: "Heading iii (Đáp án đúng)", ok: true, text: "iii) Positive gains in protection efforts: Nêu các tín hiệu đáng khích lệ từ quỹ Volkswagen (kho lưu trữ đa phương tiện) và quỹ Ford (chương trình master-apprentice)." },
+      { label: "Heading xi (Bẫy)", ok: false, text: "xi) Government participation: Volkswagen Foundation và Ford Foundation là các tổ chức từ thiện/quỹ tư nhân (charity/foundation), không phải chính phủ." }
+    ],
+    step3: "Câu chủ đề Đoạn D viết: 'But there are encouraging signs that the field has turned a corner.' (Có những dấu hiệu đáng khích lệ cho thấy lĩnh vực này đã khởi sắc ~ Positive gains in protection efforts), kèm theo các khoản tài trợ lớn và chương trình bảo tồn tại California.",
+    step4: "Cẩn thận bẫy xi (Government participation) vì bài chỉ nhắc tới các quỹ từ thiện chứ không phải chính phủ.",
+    evidenceId: "ev-q29", para: "Đoạn D (Q29)"
+  },
+  {
+    id: 30, passage: 3, type: "match",
+    prompt: "30. Paragraph E (Paragraph starting 'But the master-apprentice approach hasn't caught on...')",
+    answer: "iv",
+    options: [
+      "i) Inadequate data",
+      "ii) Consensus on an Initial recommendation for saving dying out languages",
+      "iii) Positive gains in protection efforts",
+      "iv) Minimum requirement for saving a language",
+      "v) Potential threat to minority languages",
+      "vi) A period when there was an absence of real efforts made",
+      "vii) Uncertainty about the success of native language programs",
+      "viii) Lack in confidence in young speakers as a negative factor",
+      "ix) Practice in several developing countries",
+      "x) Value of minority languages to linguists",
+      "xi) Government participation in language field"
+    ],
+    step1: "Chọn tiêu đề cho Đoạn E (Câu 30): [iv) Yêu cầu tối thiểu để cứu một ngôn ngữ].",
+    step2: [
+      { label: "Heading iv (Đáp án đúng)", ok: true, text: "iv) Minimum requirement for saving a language: Nhấn mạnh ngoài bộ khung ngữ pháp, điều tối thiểu đầu tiên cần biết để hồi sinh ngôn ngữ là cách giao tiếp đời thường (nói với trẻ nhỏ, vợ chồng trò chuyện)." },
+      { label: "Heading i (Bẫy)", ok: false, text: "i) Inadequate data: Tuy có nhắc thiếu dữ liệu ở đầu đoạn, nhưng trọng tâm kết luận của đoạn nằm ở những điều kiện căn bản đầu tiên ('first things you want to learn when you want to revitalize the language')." }
+    ],
+    step3: "Cuối Đoạn E nhấn mạnh: '\"How did people start conversations and talk to babies? How did husbands and wives converse?\" Hinton asks. \"Those are the first things you want to learn when you want to revitalize the language.\"' (the first things you want to learn to revitalize ~ minimum requirement for saving a language).",
+    step4: "Theo đáp án chuẩn của đề thi, câu 30 là iv.",
+    evidenceId: "ev-q30", para: "Đoạn E (Q30)"
+  },
+  {
+    id: 31, passage: 3, type: "match",
+    prompt: "31. Paragraph F (Paragraph starting 'But there is as yet no discipline...')",
+    answer: "vii",
+    options: [
+      "i) Inadequate data",
+      "ii) Consensus on an Initial recommendation for saving dying out languages",
+      "iii) Positive gains in protection efforts",
+      "iv) Minimum requirement for saving a language",
+      "v) Potential threat to minority languages",
+      "vi) A period when there was an absence of real efforts made",
+      "vii) Uncertainty about the success of native language programs",
+      "viii) Lack in confidence in young speakers as a negative factor",
+      "ix) Practice in several developing countries",
+      "x) Value of minority languages to linguists",
+      "xi) Government participation in language field"
+    ],
+    step1: "Chọn tiêu đề cho Đoạn F (Câu 31): [vii) Sự không chắc chắn về thành công của các chương trình ngôn ngữ bản địa].",
+    step2: [
+      { label: "Heading vii (Đáp án đúng)", ok: true, text: "vii) Uncertainty about the success of native language programs: Khẳng định các chiến lược thành công ở nơi này nhưng thất bại ở nơi khác, không thể dự đoán chắc chắn." },
+      { label: "Các Heading khác", ok: false, text: "Ví dụ ở New Zealand và Hawaii chỉ minh họa cho các chương trình bản địa đã được thử nghiệm." }
+    ],
+    step3: "Đoạn F nêu rõ: 'Almost every strategy tried so far has succeeded in some places but failed in others, and there seems to be no way to predict with certainty what will work where.' Cụm 'no way to predict with certainty' đồng nghĩa hoàn hảo với 'Uncertainty about the success'.",
+    step4: "Các lựa chọn khác không bao quát được câu chủ đề của đoạn F.",
+    evidenceId: "ev-q31", para: "Đoạn F (Q31)"
+  },
+  {
+    id: 32, passage: 3, type: "match",
+    prompt: "32. Paragraph G (Paragraph starting 'One factor that always seems to occur...')",
+    answer: "viii",
+    options: [
+      "i) Inadequate data",
+      "ii) Consensus on an Initial recommendation for saving dying out languages",
+      "iii) Positive gains in protection efforts",
+      "iv) Minimum requirement for saving a language",
+      "v) Potential threat to minority languages",
+      "vi) A period when there was an absence of real efforts made",
+      "vii) Uncertainty about the success of native language programs",
+      "viii) Lack in confidence in young speakers as a negative factor",
+      "ix) Practice in several developing countries",
+      "x) Value of minority languages to linguists",
+      "xi) Government participation in language field"
+    ],
+    step1: "Chọn tiêu đề cho Đoạn G (Câu 32): [viii) Sự thiếu tự tin ở những người nói trẻ tuổi như một yếu tố tiêu cực].",
+    step2: [
+      { label: "Heading viii (Đáp án đúng)", ok: true, text: "viii) Lack in confidence in young speakers as a negative factor: Sự hoài nghi, tự ti coi tiếng mẹ đẻ là thấp kém khiến trẻ em từ bỏ ngôn ngữ bản địa." },
+      { label: "Các Heading khác", ok: false, text: "Không đề cập đến thái độ tâm lý của cộng đồng và thế hệ trẻ." }
+    ],
+    step3: "Đoạn G giải thích: 'speakers begin to have collective doubts about the usefulness of language loyalty. Once they start regarding their own language as inferior to the majority language... Kids pick up on the attitude and prefer the dominant language.' (doubts / inferior / kids pick up on the attitude ~ lack in confidence in young speakers as a negative factor).",
+    step4: "Chốt đáp án viii.",
+    evidenceId: "ev-q32", para: "Đoạn G (Q32)"
+  },
+  {
+    id: 33, passage: 3, type: "match",
+    prompt: "33. Paragraph H (Last paragraph starting 'Linguists agree that ultimately...')",
+    answer: "ii",
+    options: [
+      "i) Inadequate data",
+      "ii) Consensus on an Initial recommendation for saving dying out languages",
+      "iii) Positive gains in protection efforts",
+      "iv) Minimum requirement for saving a language",
+      "v) Potential threat to minority languages",
+      "vi) A period when there was an absence of real efforts made",
+      "vii) Uncertainty about the success of native language programs",
+      "viii) Lack in confidence in young speakers as a negative factor",
+      "ix) Practice in several developing countries",
+      "x) Value of minority languages to linguists",
+      "xi) Government participation in language field"
+    ],
+    step1: "Chọn tiêu đề cho Đoạn H (Câu 33): [ii) Sự đồng thuận về một khuyến nghị ban đầu nhằm cứu các ngôn ngữ đang mai một].",
+    step2: [
+      { label: "Heading ii (Đáp án đúng)", ok: true, text: "ii) Consensus on an Initial recommendation for saving dying out languages: Các nhà ngôn ngữ học đồng thuận ('Linguists agree') và đưa ra bước đầu tiên ('The first step in saving dying languages')." },
+      { label: "Heading ix (Bẫy cực mạnh)", ok: false, text: "ix) Practice in several developing countries: Cameroon, Papua New Guinea và Ấn Độ chỉ là ví dụ phụ minh họa cho việc nói đa ngôn ngữ, không phải ý chính toàn đoạn." }
+    ],
+    step3: "Đoạn H mở đầu bằng sự đồng thuận: 'Linguists agree that ultimately...' (Consensus) và kết lại bằng khuyến nghị đầu tiên: 'The first step in saving dying languages is to persuade the world's majorities to allow the minorities among them to speak with their own voices.' (Initial recommendation for saving dying out languages).",
+    step4: "Loại ix vì đó chỉ là chi tiết phụ nằm giữa đoạn.",
+    evidenceId: "ev-q33", para: "Đoạn H (Q33)"
+  },
+  {
+    id: 34, passage: 3, type: "match",
+    sectionTitle: "Questions 34–38: Match each statement with the correct person (A–F).",
+    prompt: "34. Reported about the success of a language conservation practice in Hawaii",
+    answer: "C",
+    options: [
+      "A - Nicholas Ostler",
+      "B - Michael Krauss",
+      "C - Joseph E. Grimes",
+      "D - Sarah G. Thomason",
+      "E - Keneth L. Hale",
+      "F - Douglas H. Whalen"
+    ],
+    step1: "Đã báo cáo về sự thành công của một hoạt động bảo tồn ngôn ngữ tại Hawaii.",
+    step2: [
+      { label: "C - Joseph E. Grimes", ok: true, text: "Đúng — Ông báo cáo về chương trình tiếng Hawaii giúp ổn định số người bản ngữ ở mức khoảng 1.000 người." },
+      { label: "Các nhân vật A, B, D, E, F", ok: false, text: "Không nghiên cứu hoặc báo cáo về chương trình tại Hawaii." }
+    ],
+    step3: "Đoạn F viết: 'A similar approach was tried in Hawaii, with some success—the number of native speakers has stabilized at 1,000 or so, reports Joseph E. Grimes of SIL International, who is working on Oahu.'",
+    step4: "Chọn C (Joseph E. Grimes).",
+    evidenceId: "ev-q34", para: "Đoạn F (Q31)"
+  },
+  {
+    id: 35, passage: 3, type: "match",
+    prompt: "35. Predicted that many languages would disappear soon",
+    answer: "B",
+    options: [
+      "A - Nicholas Ostler",
+      "B - Michael Krauss",
+      "C - Joseph E. Grimes",
+      "D - Sarah G. Thomason",
+      "E - Keneth L. Hale",
+      "F - Douglas H. Whalen"
+    ],
+    step1: "Đã dự đoán rằng nhiều ngôn ngữ sẽ sớm biến mất.",
+    step2: [
+      { label: "B - Michael Krauss", ok: true, text: "Đúng — Dự đoán một nửa trong số 6.000 ngôn ngữ sẽ biến mất trong vòng một thế kỷ." },
+      { label: "E - Keneth L. Hale (Bẫy)", ok: false, text: "Hale chỉ ghi nhận 8 ngôn ngữ ông từng nghiên cứu đã tuyệt chủng, còn người đưa ra dự đoán ('prediction') toàn cầu là Krauss." }
+    ],
+    step3: "Đoạn A viết: 'Ten years ago, Michael Krauss sent a shudder through the discipline of linguistics with his prediction that half the 6,000 or so languages spoken in the world would cease to be uttered within a century.' (Predicted ~ prediction; disappear ~ cease to be uttered).",
+    step4: "Chọn B (Michael Krauss).",
+    evidenceId: "ev-q35", para: "Đoạn A (Q27)"
+  },
+  {
+    id: 36, passage: 3, type: "match",
+    prompt: "36. Experienced loss of languages he had worked on personally",
+    answer: "E",
+    options: [
+      "A - Nicholas Ostler",
+      "B - Michael Krauss",
+      "C - Joseph E. Grimes",
+      "D - Sarah G. Thomason",
+      "E - Keneth L. Hale",
+      "F - Douglas H. Whalen"
+    ],
+    step1: "Đã trải qua sự biến mất của những ngôn ngữ mà chính ông từng trực tiếp làm việc/nghiên cứu.",
+    step2: [
+      { label: "E - Keneth L. Hale", ok: true, text: "Đúng — 8 ngôn ngữ mà ông từng đi thực địa (done fieldwork) đã rơi vào tuyệt chủng." },
+      { label: "Các nhân vật khác", ok: false, text: "Không được đề cập việc mất đi 8 ngôn ngữ từng trực tiếp khảo sát thực địa." }
+    ],
+    step3: "Đoạn A viết: 'Keneth L. Hale of the Massachusetts Institute of Technology noted in the same journal issue that eight languages on which he had done fieldwork had since passed into extinction.' (worked on personally ~ done fieldwork; loss of languages ~ passed into extinction).",
+    step4: "Chọn E (Keneth L. Hale).",
+    evidenceId: "ev-q36", para: "Đoạn A (Q27)"
+  },
+  {
+    id: 37, passage: 3, type: "match",
+    prompt: "37. Raised language funds in England",
+    answer: "A",
+    options: [
+      "A - Nicholas Ostler",
+      "B - Michael Krauss",
+      "C - Joseph E. Grimes",
+      "D - Sarah G. Thomason",
+      "E - Keneth L. Hale",
+      "F - Douglas H. Whalen"
+    ],
+    step1: "Đã gây quỹ bảo tồn ngôn ngữ tại nước Anh (England).",
+    step2: [
+      { label: "A - Nicholas Ostler", ok: true, text: "Đúng — Điều hành một quỹ tương tự tại Anh (in England) và quyên góp được 8.000 đô la từ năm 1995." },
+      { label: "F - Douglas H. Whalen (Bẫy)", ok: false, text: "Whalen thuộc ĐH Yale (Mỹ) và lập quỹ quyên góp 80.000 đô la ở Mỹ, không phải ở Anh." }
+    ],
+    step3: "Câu cuối Đoạn C viết: 'A similar foundation in England, directed by Nicholas Ostler, has raised just $8,000 since 1995.'",
+    step4: "Cẩn thận phân biệt Whalen (Mỹ) và Nicholas Ostler (England) -> Chọn A.",
+    evidenceId: "ev-q37", para: "Đoạn C (Example)"
+  },
+  {
+    id: 38, passage: 3, type: "match",
+    prompt: "38. Not enough effort on saving languages until recent work",
+    answer: "D",
+    options: [
+      "A - Nicholas Ostler",
+      "B - Michael Krauss",
+      "C - Joseph E. Grimes",
+      "D - Sarah G. Thomason",
+      "E - Keneth L. Hale",
+      "F - Douglas H. Whalen"
+    ],
+    step1: "Cho rằng chưa có đủ nỗ lực cứu các ngôn ngữ cho đến những công việc gần đây.",
+    step2: [
+      { label: "D - Sarah G. Thomason", ok: true, text: "Đúng — Bà nhận xét rằng không có nỗ lực có tổ chức nào trong ngành cho đến gần đây khi việc này trở nên hợp thời." },
+      { label: "Các nhân vật khác", ok: false, text: "Không phát biểu nhận định này." }
+    ],
+    step3: "Đoạn C viết: '\"...says Sarah G. Thomason, a linguist at the University of Michigan at Ann Arbor. But there isn't any such effort organized in the profession. It is only recently that it has become fashionable enough to work on endangered languages.\"'",
+    step4: "Chọn D (Sarah G. Thomason).",
+    evidenceId: "ev-q38", para: "Đoạn C (Example)"
+  },
+  {
+    id: 39, passage: 3, type: "mcq",
+    sectionTitle: "Questions 39–40: Choose the correct answer A, B, C, or D.",
+    prompt: "39. What is the real result of the master-apprentice program sponsored by The Ford Foundation?",
+    answer: "C",
+    options: [
+      { letter: "A", text: "Teach children how to speak native languages" },
+      { letter: "B", text: "Revive some endangered languages in California" },
+      { letter: "C", text: "Postpone the dying date for some endangered languages" },
+      { letter: "D", text: "Increase communication between students" }
+    ],
+    step1: "Kết quả thực sự của chương trình thầy-trò (master-apprentice) do Quỹ Ford tài trợ là gì?",
+    step2: [
+      { label: "Gốc A", ok: false, text: "Teach children how to speak native languages: dạy trẻ em (sai, chương trình dạy 'younger relative' - người họ hàng trẻ, không phải chương trình dạy trẻ em nói chung)." },
+      { label: "Gốc B", ok: false, text: "Revive some endangered languages in California: hồi sinh ngôn ngữ (Hinton khẳng định rõ: 'It's too early to call this language revitalization' - còn quá sớm để gọi là hồi sinh)." },
+      { label: "Gốc C", ok: true, text: "Postpone the dying date for some endangered languages: trì hoãn ngày tuyệt chủng/kéo dài sự tồn tại của một số ngôn ngữ nguy cấp (~ prolong the survival of the language)." },
+      { label: "Gốc D", ok: false, text: "Increase communication between students: tăng giao tiếp giữa học sinh (không được đề cập)." }
+    ],
+    step3: "Cuối Đoạn D viết: '\"It's too early to call this language revitalization,\" Hinton admits... \"But at least we prolong the survival of the language.\" That will give linguists more time to record these tongues before they vanish.' Cụm 'prolong the survival of the language' đồng nghĩa trực tiếp với 'Postpone the dying date for some endangered languages'.",
+    step4: "Loại B vì đó là bẫy trực tiếp (bài phủ nhận việc đã hồi sinh thành công ngôn ngữ).",
+    evidenceId: "ev-q39", para: "Đoạn D (Q29)"
+  },
+  {
+    id: 40, passage: 3, type: "mcq",
+    prompt: "40. What should majority language speakers do according to the last paragraph?",
+    answer: "D",
+    options: [
+      { letter: "A", text: "They should teach their children endangered languages" },
+      { letter: "B", text: "They should learn at least four languages" },
+      { letter: "C", text: "They should show their loyalty to a dying language" },
+      { letter: "D", text: "They should be more tolerant of minority language speakers" }
+    ],
+    step1: "Theo đoạn văn cuối cùng, những người nói ngôn ngữ đa số nên làm gì?",
+    step2: [
+      { label: "Gốc A", ok: false, text: "They should teach their children endangered languages: dạy con họ ngôn ngữ nguy cấp (không được khuyên trong bài)." },
+      { label: "Gốc B", ok: false, text: "They should learn at least four languages: học ít nhất 4 ngôn ngữ (đây chỉ là thực tế ở Cameroon, Ấn Độ... không phải yêu cầu bắt buộc với nhóm đa số)." },
+      { label: "Gốc C", ok: false, text: "They should show their loyalty to a dying language: thể hiện lòng trung thành với ngôn ngữ đang chết (khái niệm language loyalty thuộc về người bản ngữ ở Đoạn G)." },
+      { label: "Gốc D", ok: true, text: "They should be more tolerant of minority language speakers: họ nên bao dung/chấp nhận hơn đối với những người nói ngôn ngữ thiểu số (~ allow the minorities among them to speak with their own voices)." }
+    ],
+    step3: "Câu cuối cùng của Đoạn H viết: 'The first step in saving dying languages is to persuade the world's majorities to allow the minorities among them to speak with their own voices.' Việc thuyết phục nhóm đa số không phản ứng thù địch mà cho phép nhóm thiểu số nói tiếng nói riêng của họ chính là 'be more tolerant of minority language speakers'.",
+    step4: "Loại A, B, C vì không khớp với khuyến nghị cuối bài dành cho 'the world's majorities'.",
+    evidenceId: "ev-q40", para: "Đoạn H (Q33)"
+  }
+];
+
+/* ============================================================================
+   6. STATE MANAGEMENT & RENDER FUNCTIONS
+============================================================================ */
+let currentPassage = 1;
+const userAnswers = {}; // { qId: { value, isCorrect } }
+const shuffledMcqCache = {}; // Shuffle MCQ options once per page load
+
+// Pre-shuffle MCQ options on load
+QUESTIONS.forEach((q) => {
+  if (q.type === "mcq") {
+    shuffledMcqCache[q.id] = shuffleArray(q.options);
+  }
+});
+
+function switchPassage(pNum) {
+  currentPassage = pNum;
+  document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+    btn.classList.toggle('active', idx + 1 === pNum);
+  });
+  renderLeftPane();
+  renderRightPane();
+}
+
+function renderLeftPane() {
+  const p = PASSAGES[currentPassage];
+  const leftPane = document.getElementById('left-pane');
+
+  let html = `
+    <div class="passage-header">
+      <h2>${p.title}</h2>
+      <p style="font-size:0.84rem; color:#636e72; margin-top:4px;">
+        💡 Bôi đen từ bất kỳ để Highlight màu tím • Nhấn "Mở dịch đoạn này 🌟" để đối chiếu song ngữ
+      </p>
+    </div>
+  `;
+
+  p.paragraphs.forEach((para, idx) => {
+    html += `
+      <div class="para-card" id="para-${currentPassage}-${idx}">
+        <div class="para-text">
+          <span class="para-label">${para.label}</span>
+          ${para.text}
+        </div>
+        <button class="translate-btn" onclick="toggleTrans(${idx})">Mở dịch đoạn này 🌟</button>
+        <div class="para-trans" id="trans-${idx}">
+          <strong>🇻🇳 Bản dịch chi tiết:</strong><br>${para.trans}
+        </div>
+      </div>
+    `;
+  });
+
+  // Render Academic Glossary (50+ words across the 3 passages)
+  html += `
+    <div class="glossary-box">
+      <h3>📚 BẢNG TỪ VỰNG HỌC THUẬT & SYNONYMS (PASSAGE ${currentPassage})</h3>
+      <table class="glossary-table">
+        <thead>
+          <tr>
+            <th>Từ vựng (Academic Word)</th>
+            <th>Loại từ</th>
+            <th>Nghĩa tiếng Việt ~ Từ đồng nghĩa (Synonyms trong bài & câu hỏi)</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${p.glossary.map(item => `
+            <tr>
+              <td><strong>${item[0]}</strong></td>
+              <td><span class="tag-grammar">${item[1]}</span></td>
+              <td>${item[2]}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  leftPane.innerHTML = html;
+}
+
+function toggleTrans(idx) {
+  const el = document.getElementById(`trans-${idx}`);
+  if (!el) return;
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+function renderRightPane() {
+  const rightPane = document.getElementById('right-pane');
+  const pQuestions = QUESTIONS.filter(q => q.passage === currentPassage);
+
+  let html = '';
+  pQuestions.forEach((q) => {
+    if (q.sectionTitle) {
+      html += `<div class="section-instruction">📌 ${q.sectionTitle}</div>`;
+    }
+
+    const saved = userAnswers[q.id];
+    html += `
+      <div class="q-card" id="q-card-${q.id}">
+        <div class="q-header">
+          <span class="q-num">${q.id}</span>
+          <div class="q-prompt">${q.prompt}</div>
+        </div>
+        ${renderQuestionInput(q, saved)}
+        ${renderExplanationBox(q, saved)}
+      </div>
+    `;
+  });
+
+  rightPane.innerHTML = html;
+}
+
+function renderQuestionInput(q, saved) {
+  const locked = isTimeUp ? 'disabled' : '';
+
+  if (q.type === "mcq") {
+    const opts = shuffledMcqCache[q.id];
+    const displayLabels = ["A", "B", "C", "D"];
+    return `
+      <div class="mcq-grid">
+        ${opts.map((opt, idx) => {
+          const dispLetter = displayLabels[idx];
+          let stateClass = '';
+          if (saved) {
+            if (opt.letter === q.answer) stateClass = 'correct';
+            else if (saved.value === opt.letter) stateClass = 'wrong';
+          }
+          return `
+            <button class="mcq-btn ${stateClass}" ${locked} onclick="handleMcq(${q.id}, '${opt.letter}')">
+              <div class="mcq-left">
+                <span class="mcq-letter">${dispLetter}</span>
+                <span>${opt.text} <small style="color:#636e72;">(Gốc ${opt.letter})</small></span>
+              </div>
+              <span class="badge-correct-ans">✓ ĐÁP ÁN ĐÚNG</span>
+            </button>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
+
+  if (q.type === "tfng" || q.type === "match") {
+    let stateClass = '';
+    if (saved) {
+      stateClass = saved.isCorrect ? 'correct' : 'wrong';
+    }
+    return `
+      <div class="control-row">
+        <select class="select-3d ${stateClass}" ${locked} onchange="handleSelect(${q.id}, this.value)">
+          <option value="">-- Chọn đáp án --</option>
+          ${q.options.map(opt => {
+            const val = opt.split(')')[0].split(' - ')[0].trim();
+            const selected = saved && saved.value.toLowerCase() === val.toLowerCase() ? 'selected' : '';
+            return `<option value="${val}" ${selected}>${opt}</option>`;
+          }).join('')}
+        </select>
+        ${saved ? (saved.isCorrect
+          ? `<span class="tag-true" style="font-size:0.85rem; padding:6px 12px;">✓ ĐÁP ÁN ĐÚNG (${q.answer})</span>`
+          : `<span class="tag-false" style="font-size:0.85rem; padding:6px 12px;">✗ SAI — Đáp án đúng: ${q.answer}</span>`) : ''}
+      </div>
+    `;
+  }
+
+  if (q.type === "gap") {
+    let stateClass = '';
+    if (saved) {
+      stateClass = saved.isCorrect ? 'correct' : 'wrong';
+    }
+    const val = saved ? saved.value : '';
+    return `
+      <div class="control-row">
+        <input type="text" id="gap-in-${q.id}" class="gap-input ${stateClass}" value="${val}" placeholder="Nhập từ cần điền..." ${locked} onkeydown="if(event.key==='Enter') handleGap(${q.id})" />
+        <button class="btn-3d btn-primary" ${locked} onclick="handleGap(${q.id})">✔️ Check</button>
+        ${saved ? (saved.isCorrect
+          ? `<span class="tag-true" style="font-size:0.85rem; padding:6px 12px;">✓ ĐÁP ÁN ĐÚNG: ${q.answer}</span>`
+          : `<span class="tag-false" style="font-size:0.85rem; padding:6px 12px;">✗ Đáp án chuẩn: ${q.answer}</span>`) : ''}
+      </div>
+    `;
+  }
+  return '';
+}
+
+function renderExplanationBox(q, saved) {
+  const showStyle = saved ? 'style="display:block;"' : '';
+  return `
+    <div class="exp-container" id="exp-${q.id}" ${showStyle}>
+      <div class="exp-heading">⚡ GIẢI THÍCH CHI TIẾT (ĐÁP ÁN CHUẨN: ${q.answer})</div>
+
+      <div class="exp-step1">
+        💬 <strong>Bước 1 - Dịch nghĩa toàn câu:</strong> "${q.step1}"
+      </div>
+
+      <div class="exp-step2-title">Bước 2 - Phân tích từ vựng & dịch nghĩa các phương án:</div>
+      <div class="exp-grid">
+        ${q.step2.map(item => `
+          <div class="exp-opt-box">
+            <span class="opt-origin">${item.label}:</span>
+            <span class="${item.ok ? 'tag-true' : 'tag-false'}">${item.ok ? 'Đáp án đúng' : 'Phương án nhiễu'}</span>
+            ${item.text}
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="exp-step3">
+        <strong>Bước 3 - ✅ TẠI SAO ĐÚNG?</strong>
+        <span class="tag-grammar">Dẫn chứng: ${q.para}</span>
+        ${q.step3}
+        <div>
+          <button class="locate-btn" onclick="locateEvidence('${q.evidenceId}')">
+            🖱️ Định vị dẫn chứng trong bài đọc (${q.para})
+          </button>
+        </div>
+      </div>
+
+      <div class="exp-step4">
+        <strong>Bước 4 - ❌ TẠI SAO CÁC ĐÁP ÁN CÒN LẠI SAI?</strong> ${q.step4}
+      </div>
+    </div>
+  `;
+}
+
+/* ============================================================================
+   7. INTERACTION HANDLERS (INSTANT GRADING + EXPLANATION + LOCATE EVIDENCE)
+============================================================================ */
+function handleMcq(qId, chosenLetter) {
+  if (isTimeUp) return;
+  const q = QUESTIONS.find(item => item.id === qId);
+  const isCorrect = chosenLetter.toLowerCase() === q.answer.toLowerCase();
+  userAnswers[qId] = { value: chosenLetter, isCorrect };
+  triggerFeedback(isCorrect);
+  renderRightPane();
+  updateProgress();
+}
+
+function handleSelect(qId, chosenVal) {
+  if (isTimeUp || !chosenVal) return;
+  const q = QUESTIONS.find(item => item.id === qId);
+  // Question 4 allows TRUE (and notes NG/True from original key)
+  const isCorrect = chosenVal.toLowerCase() === q.answer.toLowerCase() || (qId === 4 && chosenVal === "NOT GIVEN");
+  userAnswers[qId] = { value: chosenVal, isCorrect };
+  triggerFeedback(isCorrect);
+  renderRightPane();
+  updateProgress();
+}
+
+function handleGap(qId) {
+  if (isTimeUp) return;
+  const inputEl = document.getElementById(`gap-in-${qId}`);
+  if (!inputEl) return;
+  const rawVal = inputEl.value.trim();
+  if (!rawVal) return;
+  const q = QUESTIONS.find(item => item.id === qId);
+  const isCorrect = rawVal.toLowerCase() === q.answer.toLowerCase();
+  userAnswers[qId] = { value: rawVal, isCorrect };
+  triggerFeedback(isCorrect);
+  renderRightPane();
+  updateProgress();
+}
+
+function triggerFeedback(isCorrect) {
+  playSound(isCorrect);
+  if (isCorrect) fireConfetti();
+}
+
+function locateEvidence(evId) {
+  // Remove previous active highlights
+  document.querySelectorAll('.evidence-active').forEach(el => el.classList.remove('evidence-active'));
+  const target = document.getElementById(evId);
+  if (target) {
+    target.classList.add('evidence-active');
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function updateProgress() {
+  const answeredCount = Object.keys(userAnswers).length;
+  const pct = Math.round((answeredCount / 40) * 100);
+  document.getElementById('progress-fill').style.width = `${pct}%`;
+  document.getElementById('progress-label').textContent = `Đã làm: ${answeredCount}/40 (${pct}%)`;
+}
+
+/* ============================================================================
+   8. PASTEL PURPLE TEXT HIGHLIGHTER (AUTOMATIC ON MOUSE SELECTION)
+============================================================================ */
+document.addEventListener('mouseup', () => {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  const text = sel.toString().trim();
+  if (text.length < 2 || text.length > 180) return;
+
+  try {
+    const range = sel.getRangeAt(0);
+    const parent = range.commonAncestorContainer.parentElement;
+    if (!parent) return;
+    // Only highlight inside passages or question prompts
+    if (!parent.closest('.para-text') && !parent.closest('.q-prompt')) return;
+
+    const span = document.createElement('span');
+    span.className = 'user-highlight';
+    span.title = 'Click để xóa highlight';
+    span.onclick = function(e) {
+      e.stopPropagation();
+      const txtNode = document.createTextNode(this.textContent);
+      this.replaceWith(txtNode);
+    };
+    range.surroundContents(span);
+    sel.removeAllRanges();
+  } catch (err) {}
+});
+
+/* ============================================================================
+   9. 20:00 COUNTDOWN TIMER
+============================================================================ */
+let remainingSeconds = 20 * 60;
+let timerInterval = null;
+let isTimerRunning = false;
+let isTimeUp = false;
+
+function updateTimerUI() {
+  const mins = String(Math.floor(remainingSeconds / 60)).padStart(2, '0');
+  const secs = String(remainingSeconds % 60).padStart(2, '0');
+  document.getElementById('timer-display').textContent = `${mins}:${secs}`;
+}
+
+function toggleTimer() {
+  const btn = document.getElementById('btn-start-timer');
+  if (isTimeUp) return;
+
+  if (!isTimerRunning) {
+    isTimerRunning = true;
+    btn.textContent = '⏸️ TẠM DỪNG';
+    timerInterval = setInterval(() => {
+      if (remainingSeconds > 0) {
+        remainingSeconds--;
+        updateTimerUI();
+      } else {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        isTimeUp = true;
+        btn.textContent = '⌛ ĐÃ HẾT GIỜ';
+        alert('Đã hết giờ làm bài, vui lòng nộp bài nhé!');
+        renderRightPane();
+      }
+    }, 1000);
+  } else {
+    clearInterval(timerInterval);
+    isTimerRunning = false;
+    btn.textContent = '▶️ TIẾP TỤC';
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  isTimerRunning = false;
+  isTimeUp = false;
+  remainingSeconds = 20 * 60;
+  updateTimerUI();
+  document.getElementById('btn-start-timer').textContent = '⏱️ BẮT ĐẦU TÍNH GIỜ LÀM BÀI';
+  renderRightPane();
+}
+
+/* ============================================================================
+   10. IELTS BAND SCORE CONVERSION & TEACHER FEEDBACK MODAL
+============================================================================ */
+function calculateBandScore(correct) {
+  if (correct >= 39) return 9.0;
+  if (correct >= 37) return 8.5;
+  if (correct >= 35) return 8.0;
+  if (correct >= 33) return 7.5;
+  if (correct >= 30) return 7.0;
+  if (correct >= 27) return 6.5;
+  if (correct >= 23) return 6.0;
+  if (correct >= 20) return 5.5;
+  if (correct >= 16) return 5.0;
+  if (correct >= 13) return 4.5;
+  if (correct >= 10) return 4.0;
+  if (correct >= 7) return 3.5;
+  if (correct >= 5) return 3.0;
+  if (correct >= 3) return 2.5;
+  return 2.0;
+}
+
+function submitExam() {
+  let correctCount = 0;
+  QUESTIONS.forEach(q => {
+    if (userAnswers[q.id] && userAnswers[q.id].isCorrect) {
+      correctCount++;
+    } else if (!userAnswers[q.id]) {
+      // Reveal explanations for unanswered questions upon submission
+      userAnswers[q.id] = { value: "", isCorrect: false };
+    }
+  });
+
+  renderRightPane();
+  updateProgress();
+
+  const pct = Math.round((correctCount / 40) * 100);
+  const band = calculateBandScore(correctCount);
+
+  let feedback = "";
+  if (pct < 60) {
+    feedback = "💬 Lời nhắn từ Ms Lê Hằng: “Điểm lần này chưa cao lắm, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!”";
+  } else if (pct < 90) {
+    feedback = "💬 Lời nhắn từ Ms Lê Hằng: “Con đã có tiến bộ khá ổn rồi, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!”";
+  } else {
+    feedback = "💬 Lời nhắn từ Ms Lê Hằng: “Làm tốt lắm, con cố gắng ring điểm 10 ở lần sau nha!”";
+    fireConfetti();
+  }
+
+  document.getElementById('modal-band').textContent = band.toFixed(1);
+  document.getElementById('modal-score-line').textContent = `Số câu đúng: ${correctCount} / 40 (${pct}%)`;
+  document.getElementById('modal-feedback').textContent = feedback;
+  document.getElementById('score-modal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('score-modal').style.display = 'none';
+}
+
+// Initial Render
+switchPassage(1);
+</script>
+</body>
+</html>
